@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1440px" height="614px" viewBox="0 0 1440 614" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>Desktop HD</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD">
+            <g id="Group" transform="translate(-805.000000, -1500.000000)">
+                <rect id="Rectangle" fill="#091A57" x="733.670677" y="717.8974" width="1514.49208" height="1401.60353"></rect>
+                <polygon id="Triangle" fill-opacity="0.05" fill="#D8D8D8" style="mix-blend-mode: color-burn;" points="1162.85927 1460.8864 1920.10531 2119.27653 405.613228 2119.27653"></polygon>
+                <polygon id="Triangle-Copy-2" fill-opacity="0.05" fill="#D8D8D8" style="mix-blend-mode: color-burn;" transform="translate(1660.161056, 894.797951) rotate(-120.000000) translate(-1660.161056, -894.797951) " points="1660.16106 418.132339 2417.4071 1371.46356 902.915016 1371.46356"></polygon>
+                <polygon id="Triangle-Copy" fill-opacity="0.05" fill="#D8D8D8" style="mix-blend-mode: color-burn;" transform="translate(1177.021135, 1577.107631) rotate(-195.000000) translate(-1177.021135, -1577.107631) " points="1177.02114 704.983432 2161.51054 2449.23183 192.531735 2449.23183"></polygon>
+            </g>
+            <polygon id="Triangle-2" fill="#005CB9" transform="translate(0.239878, 693.890891) rotate(-3.000000) translate(-0.239878, -693.890891) " points="0.239877818 632.924441 1624.51503 754.85734 -1624.03528 754.85734"></polygon>
+        </g>
+    </g>
+</svg>

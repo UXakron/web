@@ -1,0 +1,12 @@
+.button, input[type=submit] {
+  background-color: $mediumblue;
+  padding: .5em 2em;
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+  margin-bottom: 2em;
+  border: 1px solid white;
+  &:hover, &:focus {
+    background-color: darken($mediumblue, 5%);
+  }
+}
