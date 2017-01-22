@@ -1,0 +1,6 @@
+@import url(reset.css);
+@import url(header.css);
+
+body {
+  font-family: Arial, Helvetica;
+}
