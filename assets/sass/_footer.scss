@@ -1,7 +1,13 @@
 footer {
+  background-color: $cyan;
+  color: white;
+}
+
+.footer__container {
+  -webkit-clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
   background-color: $darkblue;
   padding: 2em;
-  color: white;
 }
 
 .footer__link {

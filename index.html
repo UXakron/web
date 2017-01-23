@@ -9,6 +9,7 @@
   </head>
   <body>
     <header>
+      <div class="header__container">
       <section class="container">
         <img class="header__logo" src="assets/img/ux-akron-mark.png" alt="UX" />
         <div class="header__info">
@@ -16,6 +17,7 @@
           <h2 class="
           header__subtitle">A User Experience Community in Northeast Ohio</h2>
         </div>
+      </div>
       </section>
     </header>
     <main>
@@ -25,33 +27,39 @@
 </p>
     </section>
     <section class="photo-teaser">
-      <div class="photo-teaser__photo">
-        <img src="assets/img/feature-photo.jpg" alt="UX Akron Attendees use virtual reality equipment" />
-      </div>
-      <div class="photo-teaser__text">
-        <h3>Attend an Event</h3>
-        <p>See a list of upcoming meetups and register for one that interests you.</p>
-        <a class="button" href="#">Visit Our Meetup Site</a>
+      <div class="container">
+        <div class="photo-teaser__photo">
+          <img src="assets/img/feature-photo.jpg" alt="UX Akron Attendees use virtual reality equipment" />
+        </div>
+        <div class="photo-teaser__text">
+          <h3>Attend an Event</h3>
+          <p>We hold monthly events that are open to anyone!  Take a look at our list of upcoming meetups and register for one that interests you.</p>
+          <a class="button" href="#">See Upcoming Events</a>
+        </div>
       </div>
     </section>
     <section class="container full-teaser">
       <h3>Join Our Mailing List</h3>
-      <p>We’ll send you information about upcoming UX meetups and events.</p>
+      <p>Interested in future events?  Enter your information here and we’ll send you information about upcoming UX meetups and events.  Don't worry – we'll never share your information.</p>
       <form>
-        <input class="form__text" type="text" placeholder="First and Last Name" />
-        <input class="form__text" type="text" placeholder="Email Address" />
+        <div class="form__fields">
+          <input class="form__text" type="text" placeholder="First and Last Name" />
+          <input class="form__text" type="text" placeholder="Email Address" />
+        </div>
         <input type="submit" />
       </form>
     </section>
     </main>
     <footer>
-      <section class="container">
-        <a class="footer__link" href="#">@uxakron</a>
-        <span class="footer__text">Copyright 2017 UX Akron</span>
-      </section>
+      <div class="footer__container">
+        <section class="container">
+          <a class="footer__link" href="#">@uxakron</a>
+          <span class="footer__text">Copyright 2017 UX Akron</span>
+        </section>
+      </div>
     </footer>
     <link href="assets/css/style.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,400i,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,400i,700,900" rel="stylesheet">
     <script src="//localhost:35729/livereload.js"></script>
   </body>
 </html>

@@ -1,12 +1,57 @@
 .photo-teaser {
   width: calc(100% + 4em);
   margin-left: -2em;
+  color: $darkblue;
+  background-color: white;
+  -webkit-clip-path: polygon(0 3%, 100% 0, 100% 100%, 0 97%);
+clip-path: polygon(0 3%, 100% 0, 100% 100%, 0 97%);
+  @media screen and (min-width: $small) {
+    margin-bottom: 2em;
+    margin: inherit 0;
+    padding-top: 6em;
+    padding-bottom: 2em;
+
+  }
+  h3 {
+    border-bottom-color: $cyan;
+  }
+}
+
+.photo-teaser .container {
+  @media screen and (min-width: $small) {
+    display: flex;
+  }
+  @media screen and (min-width: $medium) {
+    width: calc(100% + 4em);
+  }
 }
 
 .photo-teaser__photo {
-  margin-bottom: 2em;
+  padding-bottom: 2em;
+  @media screen and (min-width: $small) {
+    width: 60%;
+    padding-left: 2em;
+  }
+  @media screen and (min-width: $medium) {
+    margin-left: -2em;
+    width: 55%;
+    padding-left: 0;
+  }
 }
 
 .photo-teaser__text {
   padding: 0 2em;
+  p {
+    margin-left: 0;
+  }
+  .button {
+    margin-left: 0;
+  }
+  @media screen and (min-width: $small) {
+    padding-left: 3em;
+    width: 40%;
+  }
+  @media screen and (min-width: $medium) {
+    width: 45%;
+  }
 }
