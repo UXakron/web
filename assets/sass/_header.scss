@@ -4,65 +4,79 @@ header {
 }
 
 .header__container {
+  background-color: $cyan;
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 96%);
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 96%);
-  background-image: url('../img/header-background.svg');
-  background-size: cover;
+  background-image: url('../img/hex.svg');
   background-position: center center;
   padding: 2em 2em 3em 2em;
   @media screen and (min-width: $small) {
-    padding: 3em 3em 3em 2em;
+    padding: 3em 3em 3.5em 2em;
   }
   @media screen and (min-width: 1000px) {
     background-attachment: fixed;
-    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 92%);
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 92%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 91%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 91%);
   }
 }
 
 header .container {
   @media screen and (min-width: $small) {
     display: flex;
+    align-items: flex-start;
+  }
+  @media screen and (min-width: $medium) {
+    align-items: center;
   }
 }
 
 .header__info {
   @media screen and (min-width: $small) {
-    margin-left: 10%;
+    margin-left: 13%;
+  }
+  @media screen and (min-width: $medium) {
+    display: flex;
+    align-items: center;
   }
 }
 
 .header__logo {
   width: 125px;
   @media screen and (min-width: 600px) {
-    width: 150px;
+    width: 125px;
   }
 }
 
 .header__title {
   letter-spacing: 1px;
-  font-size: 2.1em;
+  font-size: 3.2em;
   font-weight: 900;
-  &:after {
-    content:"";
-    margin-top: .5em;
-    display: block;
-    width: 25px;
-    height: 3px;
-    background-color: white;
+  margin-bottom: 0;
+  margin-top: .25em;
+  @media screen and (min-width: $small) {
+    font-size: 3.5em;
+  }
+  @media screen and (min-width: $medium) {
+    width: 100%;
+    margin-top: 0;
   }
 }
 
 .header__subtitle {
   font-weight: 300;
-  font-size: 1.1em;
-  margin-top: -1.8em;
-  margin-left: 2em;
+  font-size: 1em;
+  margin-top: -.5em;
   line-height: 1.3;
-  width: 60%;
+  width: 80%;
   @media screen and (min-width: $small) {
-    margin-top: inherit;
+    font-size: 1.1em;
+    margin-top: 0;
+  }
+  @media screen and (min-width: $medium) {
     margin-left: 0;
-    width: inherit;
+    margin-bottom: 0;
+    border-left: 2px solid white;
+    padding-left: 3%;
+
   }
 }

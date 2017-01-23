@@ -7,10 +7,15 @@
   }
 }
 
+form {
+  width: 100%;
+}
+
 .form__fields {
   @media screen and (min-width: $small) {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    padding-top: 3em;
   }
 }

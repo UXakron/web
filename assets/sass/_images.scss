@@ -8,7 +8,7 @@ clip-path: polygon(0 3%, 100% 0, 100% 100%, 0 97%);
   @media screen and (min-width: $small) {
     margin-bottom: 2em;
     margin: inherit 0;
-    padding-top: 6em;
+    padding-top: 5em;
     padding-bottom: 2em;
 
   }
@@ -28,14 +28,35 @@ clip-path: polygon(0 3%, 100% 0, 100% 100%, 0 97%);
 
 .photo-teaser__photo {
   padding-bottom: 2em;
+  position: relative;
   @media screen and (min-width: $small) {
-    width: 60%;
+    width: 40%;
     padding-left: 2em;
   }
   @media screen and (min-width: $medium) {
     margin-left: -2em;
     width: 55%;
     padding-left: 0;
+  }
+  &:after {
+    @media screen and (min-width: $small) {
+      background-image: url(../img/image-shape.svg);
+      background-repeat: no-repeat;
+      background-size: 100% auto;
+      top: 0;
+      left: 20px;
+      height: auto;
+      content: "";
+      width: 200px;
+      height: 200px;
+      position: absolute;
+      z-index: -1;
+    }
+    @media screen and (min-width: $medium) {
+      left: -20px;
+      width: 425px;
+      height: 425px;
+    }
   }
 }
 
@@ -49,7 +70,7 @@ clip-path: polygon(0 3%, 100% 0, 100% 100%, 0 97%);
   }
   @media screen and (min-width: $small) {
     padding-left: 3em;
-    width: 40%;
+    width: 60%;
   }
   @media screen and (min-width: $medium) {
     width: 45%;
