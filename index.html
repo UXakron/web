@@ -6,6 +6,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>UX Akron: User Experience Meetup Community in Northeast Ohio</title>
     <meta name="description" content="Join a meetup group of user experience professionals from Akron, Kent, Youngstown and Canton Ohio">
+    <script>
+    (function(w){
+      "use strict";
+      var loadCSS = function( href, before, media ){
+        var doc = w.document;
+        var ss = doc.createElement( "link" );
+        var ref;
+        if( before ){
+          ref = before;
+        }
+        else {
+          var refs = ( doc.body || doc.getElementsByTagName( "head" )[ 0 ] ).childNodes;
+          ref = refs[ refs.length - 1];
+        }
+
+        var sheets = doc.styleSheets;
+        ss.rel = "stylesheet";
+        ss.href = href;
+        ss.media = "only x";
+
+        ref.parentNode.insertBefore( ss, ( before ? ref : ref.nextSibling ) );
+        var onloadcssdefined = function( cb ){
+          var resolvedHref = ss.href;
+          var i = sheets.length;
+          while( i-- ){
+            if( sheets[ i ].href === resolvedHref ){
+              return cb();
+            }
+          }
+          setTimeout(function() {
+            onloadcssdefined( cb );
+          });
+        };
+        ss.onloadcssdefined = onloadcssdefined;
+        onloadcssdefined(function() {
+          ss.media = media || "all";
+        });
+        return ss;
+      };
+      if( typeof module !== "undefined" ){
+        module.exports = loadCSS;
+      }
+      else {
+        w.loadCSS = loadCSS;
+      }
+    }( typeof global !== "undefined" ? global : this ));
+    loadCSS( "assets/css/style.css" );
+    loadCSS( "https://fonts.googleapis.com/css?family=Overpass:300,400,400i,900" );
+  </script>
+  <noscript>
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,400i,900" rel="stylesheet">
+  </noscript>
   </head>
   <body>
     <header>
@@ -83,8 +136,6 @@
         </section>
       </div>
     </footer>
-    <link href="assets/css/style.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,400i,900" rel="stylesheet">
     <!--
     <script src="//localhost:35729/livereload.js"></script>
   -->
