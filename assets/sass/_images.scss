@@ -8,13 +8,15 @@ clip-path: polygon(0 3%, 100% 0, 100% 100%, 0 97%);
   @media screen and (min-width: $small) {
     margin-bottom: 2em;
     margin: inherit 0;
-    padding-top: 5em;
+    padding-top: 6em;
     padding-bottom: 2em;
 
   }
-  h3 {
-    border-bottom-color: $cyan;
-  }
+    h3 {
+      &:after {
+        border-color: rgba($cyan,.7) transparent transparent transparent;
+      }
+    }
 }
 
 .photo-teaser .container {
@@ -44,11 +46,11 @@ clip-path: polygon(0 3%, 100% 0, 100% 100%, 0 97%);
       background-repeat: no-repeat;
       background-size: 100% auto;
       top: 0;
-      left: 20px;
+      left: 0;
       height: auto;
       content: "";
-      width: 200px;
-      height: 200px;
+      width: 350px;
+      height: 350px;
       position: absolute;
       z-index: -1;
     }

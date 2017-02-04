@@ -9,16 +9,14 @@
   </head>
   <body>
     <header>
-      <div class="header__container">
-      <section class="container">
-        <img class="header__logo" src="assets/img/ux-akron-mark.png" alt="UX" />
-        <div class="header__info">
-          <h1 class="header__title">UX Akron</h1>
-          <h2 class="
-          header__subtitle">A User Experience Community in Northeast Ohio</h2>
+        <div class="header__container">
+          <img class="header__logo" src="assets/img/ux-akron-mark.png" alt="UX" />
+          <div class="header__info">
+            <h1 class="header__title">UX Akron</h1>
+            <h2 class="
+            header__subtitle">A User Experience Community in Northeast Ohio</h2>
+          </div>
         </div>
-      </div>
-      </section>
     </header>
     <main>
       <section class="container paragraph-teaser">
@@ -41,13 +39,34 @@
     <section class="container full-teaser">
       <h3>Mailing List</h3>
       <p>Interested in future events?  Enter your information here and we’ll send you information about upcoming UX meetups and events.  Don't worry – we'll never share your information.</p>
-      <form>
-        <div class="form__fields">
-          <input class="form__text" type="text" placeholder="First and Last Name" />
-          <input class="form__text" type="text" placeholder="Email Address" />
-        </div>
-        <input type="submit" />
-      </form>
+      <!-- Begin MailChimp Signup Form -->
+          <div id="mc_embed_signup" class="form__fields">
+          <form action="//uxakron.us15.list-manage.com/subscribe/post?u=f51f6b354c9fad0b6842f0bae&amp;id=b1a98465fe" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+              <div id="mc_embed_signup_scroll">
+                <div class="mc-field-group">
+                	<label for="mce-EMAIL">Email Address </label>
+                	<input class="form__text" type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+                </div>
+                <div class="form__text__half">
+                  <div class="mc-field-group form__text__half__field">
+                  	<label for="mce-FNAME">First Name </label>
+                  	<input class="form__text" type="text" value="" name="FNAME" class="" id="mce-FNAME">
+                  </div>
+                  <div class="mc-field-group form__text__half__field">
+                  	<label for="mce-LNAME">Last Name </label>
+                  	<input class="form__text" type="text" value="" name="LNAME" class="" id="mce-LNAME">
+                  </div>
+                </div>
+          	<div id="mce-responses" class="clear">
+          		<div class="response" id="mce-error-response" style="display:none"></div>
+          		<div class="response" id="mce-success-response" style="display:none"></div>
+          	</div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+              <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_f51f6b354c9fad0b6842f0bae_b1a98465fe" tabindex="-1" value=""></div>
+              <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+              </div>
+          </form>
+          </div>
+      <!--End mc_embed_signup-->
     </section>
     </main>
     <footer>

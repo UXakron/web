@@ -1,43 +1,29 @@
 header {
   background-color: $cyan;
   color: white;
+  background-image: url('../img/hex6.svg');
+  background-size: 200% auto;
+  padding: 2em;
+  z-index:5;
+  position:relative;
+  @media screen and (min-width: $medium) {
+    align-items: center;
+    background-image: url('../img/hex6.svg');
+    background-size: 200% auto;
+    background-position: center center;
+    padding: 4.5em 2em 7em 2em;
+  }
 }
 
 .header__container {
-  background-color: $cyan;
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 96%);
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 96%);
-  background-image: url('../img/hex.svg');
-  background-position: center center;
-  padding: 2em 2em 3em 2em;
-  @media screen and (min-width: $small) {
-    padding: 1.5em 2em 1.5em 2em;
-  }
-  @media screen and (min-width: $medium) {
-    background-image: none;
-    padding:0;
-    -webkit-clip-path: none;
-    clip-path: none;
-  }
-  @media screen and (min-width: 1000px) {
-    background-attachment: fixed;
-  }
-}
-
-header .container {
   @media screen and (min-width: $small) {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
   }
   @media screen and (min-width: $medium) {
-    align-items: center;
-    background-image: url('../img/hex.svg');
-    background-size: 200% auto;
-    background-position: center center;
-    padding: 1em 9em 1.5em 9em;
-    max-width: 1100px;
-    -webkit-clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
-clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
+    max-width: 1000px;
   }
 }
 
@@ -46,15 +32,23 @@ clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
     margin-left: 13%;
   }
   @media screen and (min-width: $medium) {
-    display: flex;
-    align-items: center;
+    margin-left: inherit;
+    margin-right: 0;
+    width: 45%;
   }
 }
 
 .header__logo {
   width: 125px;
   @media screen and (min-width: 600px) {
-    width: 100px;
+    width: 250px;
+  }
+  @media screen and (min-width: $medium) {
+    transform: scale(1.7);
+    z-index: 50;
+    margin-left: 11%;
+    top: 1.9em;
+    position: relative;
   }
 }
 
@@ -65,11 +59,12 @@ clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
   margin-bottom: 0;
   margin-top: .25em;
   @media screen and (min-width: $small) {
-    font-size: 3.4em;
+    font-size: 2.5em;
   }
   @media screen and (min-width: $medium) {
     width: 100%;
     margin-top: 0;
+    font-size: 3.2em;
   }
 }
 
@@ -82,12 +77,12 @@ clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
   @media screen and (min-width: $small) {
     font-size: 1.1em;
     margin-top: 0;
+    line-height: 1.4;
   }
   @media screen and (min-width: $medium) {
     margin-left: 0;
     margin-bottom: 0;
-    border-left: 2px solid white;
-    padding-left: 3%;
-
+    width: 70%;
+    font-size: 1.3em;
   }
 }
