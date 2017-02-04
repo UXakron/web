@@ -1,10 +1,11 @@
 main {
   padding: 2em 2em 0 2em;
   background-color: $cyan;
+  background-image: url('../img/hex-background.svg');
   color: white;
   position: relative;
   z-index:50;
-  border-top: 2px solid white;
+  border-top: 1px solid white;
 }
 
 .container {
@@ -23,8 +24,8 @@ main {
     align-items: flex-start;
     background-size: 20% auto;
     background-position: left 115px;
-    padding-top: 2.5em;
-    padding-bottom: 3em;
+    padding-top: 3.5em;
+    padding-bottom: 4em;
   }
 }
 
@@ -47,7 +48,7 @@ main {
 
 .full-teaser {
   padding-top: 3em;
-  background-image: url('../img/network.svg');
+  background-image: url('../img/mail.svg');
   background-size: 18% auto;
   background-repeat: no-repeat;
   background-position: left 115px;
@@ -56,7 +57,7 @@ main {
     flex-wrap: wrap;
     align-items: flex-start;
     background-size: 20% auto;
-    background-position: left 20px;
+    background-position: left 120px;
   }
 }
 
@@ -92,11 +93,28 @@ h3 {
   }
 }
 
+h4 {
+  margin-top: 0;
+  padding-top: 0;
+  font-size: 1.1em;
+  margin-bottom: .25em;
+}
+
+main ul {
+  margin-top: 0;
+  padding-top: 0;
+  margin-bottom: 1.5em;
+}
+
+p a, ul a {
+  color: $mediumblue;
+}
+
 p {
   margin-left: 25%;
   margin-top: 0;
   padding-top: 0;
-  margin-bottom: 2em;
+  margin-bottom: 1.75em;
   @media screen and (min-width: $small) {
     margin-left: 0;
     font-size: 1.1em;

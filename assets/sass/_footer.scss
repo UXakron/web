@@ -1,11 +1,16 @@
 footer {
   background-color: $cyan;
   color: white;
+  h3 {
+    &:after {
+      border-color: $cyan transparent transparent transparent;
+    }
+  }
 }
 
 .footer__container {
   background-color: $darkblue;
-  padding: 2em;
+  padding: 2.5em 2em 2em 2em;
 }
 
 .footer__link {
