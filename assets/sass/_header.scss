@@ -1,11 +1,14 @@
 header {
   color: white;
-  background-image: url('../img/hex-new2.jpg');
+  background-image: url('../img/hex-small.jpg');
   padding: 2em;
   background-size: 200% auto;
   border-bottom: 5px solid white;
   box-shadow: 8px 8px 3px rgba(0,0,0,1);
   position: relative;
+  @media screen and (min-width: $medium) {
+    background-image: url('../img/hex-new2.jpg');
+  }
   @media screen and (min-width: $medium) {
     align-items: center;
     background-size: cover;
