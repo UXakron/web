@@ -42,6 +42,11 @@ module.exports = function(grunt) {
         }
       },
     },
+    shell: {
+      patternlab: {
+        command: "php lab/core/console -gp"
+      }
+    },
     watch: {
       css: {
 				files: '**/sass/*.scss',
@@ -59,6 +64,8 @@ module.exports = function(grunt) {
 			},
       html: {
         files: ['*.html'],
+        files: ['lab/source/_patterns/**/*.mustache', 'lab/source/_patterns/**/*.md',  'lab/source/**/*.json'],
+        tasks: ['shell:patternlab'],
         options: {
           spawn: false,
           livereload: true
