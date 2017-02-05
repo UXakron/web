@@ -1,22 +1,22 @@
 header {
-  background-color: $cyan;
   color: white;
-  background-image: url('../img/hex-optimized.jpg');
-  background-size: 200% auto;
+  background-image: url('../img/hex-new2.jpg');
   padding: 2em;
-  z-index:5;
-  position:relative;
+  background-size: 200% auto;
+  border-bottom: 5px solid white;
+  box-shadow: 8px 8px 3px rgba(0,0,0,1);
+  position: relative;
   @media screen and (min-width: $medium) {
     align-items: center;
-    background-image: url('../img/hex-optimized.jpg');
-    background-size: 125% auto;
-    background-position: center center;
-    padding: 3.75em 2em 7em 2em;
+    background-size: cover;
     background-attachment: fixed;
+    padding: 3.75em 2em 7em 2em;
   }
 }
 
 .header__container {
+  z-index: 50;
+  position: relative;
   @media screen and (min-width: $small) {
     display: flex;
     align-items: center;
@@ -35,7 +35,7 @@ header {
   @media screen and (min-width: $medium) {
     margin-left: inherit;
     margin-right: 0;
-    width: 47%;
+    width: 50%;
   }
 }
 
@@ -60,30 +60,38 @@ header {
   margin-bottom: 0;
   margin-top: .25em;
   text-shadow: 1px 1px 3px rgba(0,0,0,.2);
+  display: inline-block;
+  position: relative;
+  &:after {
+    content: "";
+    height: 3px;
+    position:absolute;
+    bottom: -3px;
+    left: 0;
+    z-index:-1;
+    z-index: 10;
+    border-style: solid;
+    border-width: 6px 4px 0 2px;
+    border-color: $lightblue transparent transparent transparent;
+    width: 100%;
+    max-width: 70px;
+  }
   @media screen and (min-width: $small) {
     font-size: 2.3em;
-    display: inline-block;
-    position: relative;
     &:after {
-      content: "";
-      height: 3px;
-      position:absolute;
-      bottom: -3px;
-      left: 0;
-      z-index:-1;
-      border-style: solid;
-      border-width: 6px 4px 0 2px;
-      border-color: $lightblue transparent transparent transparent;
-      width: 100%;
-      max-width: 70px;
+      max-width: 55px;
     }
   }
   @media screen and (min-width: $small-ish) {
     font-size: 2.7em;
+    &:after {
+      max-width: 65px;
+    }
   }
   @media screen and (min-width: $medium) {
     margin-top: 0;
     font-size: 3.5em;
+    padding-top: .5em;
     &:after {
       border-width: 10px 5px 0 3px;
       max-width: 80px;
@@ -94,15 +102,14 @@ header {
 .header__subtitle {
   font-weight: 300;
   font-size: 1em;
-  margin-top: -.5em;
+  margin-top: 0;
   line-height: 1.3;
   width: 80%;
+  padding-top: 1.5em;
   @media screen and (min-width: $small) {
-    font-size: 1.1em;
-    margin-top: 0;
+    font-size: 1em;
     line-height: 1.4;
-    width: 95%;
-    padding-top: .75em;
+    width: 100%;
   }
   @media screen and (min-width: $medium) {
     margin-bottom: 0;

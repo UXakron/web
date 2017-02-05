@@ -17,10 +17,41 @@ footer {
   color: white;
   text-decoration: none;
   display: block;
+  margin-bottom: .65em;
+  padding-left: 45px;
+  position: relative;
+  transition: color .3s ease-in-out;
+  &:hover {
+    color: $cyan;
+  }
+    &:before {
+      width: 15px;
+      height: 15px;
+      left: 0;
+      top: 0;
+      display: inline-block;
+      position: absolute;
+  }
 }
 
 .footer__text {
   display: block;
   font-size: .8em;
   margin-top: 2em;
+  padding-top: 1em;
+  border-top: 1px solid white;
+}
+
+.footer__link--twitter {
+    &:before {
+      content: url('../img/twitter.svg');
+  }
+}
+
+.footer__link--email {
+    &:before {
+      content: url('../img/email.svg');
+      margin-left: 1px;
+      top: 3px;
+  }
 }
