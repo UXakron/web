@@ -124,6 +124,11 @@ main ul {
   margin-top: 0;
   padding-top: 0;
   margin-bottom: 2em;
+  li {
+    margin-top: .35em;
+    margin-bottom: .5em;
+    line-height: 1.3;
+  }
 }
 
 p a, ul a {

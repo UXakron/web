@@ -1,0 +1,72 @@
+.header__logo {
+  transition: .1s all ease-in-out;
+  @media screen and (min-width: $medium) {
+    transition: none;
+  }
+}
+
+header {
+  transition: .2s padding ease-in-out;
+}
+
+.main--smaller {
+  margin-top:130px;
+}
+
+
+.header--smaller {
+  height:100px;
+  padding: .25em;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: inherit;
+  opacity: .97;
+  @media screen and (min-width: $medium) {
+    text-align: center;
+  }
+  .header__logo {
+    transform: scale(.5);
+    top:-20px;
+    position:relative;
+    float: left;
+    @media screen and (min-width: $small) {
+      width: 125px;
+    }
+    @media screen and (min-width: $medium) {
+      margin-left: 0;
+      left: 37%;
+    }
+  }
+  .header__info {
+    float: left;
+    width: 59%;
+    @media screen and (min-width: $tiny) {
+      width: 70%;
+    }
+    @media screen and (min-width: $small) {
+      margin-left: 0;
+    }
+    @media screen and (min-width: $medium) {
+      margin-left: 8%;
+    }
+  }
+  .header__title {
+    font-size: 1.5em;
+    margin-top: 1em;
+    &:after {
+      content: none;
+    }
+    @media screen and (min-width: $small) {
+      margin-top: .8em;
+    }
+    @media screen and (min-width: $medium) {
+      padding-top: 0;
+    }
+  }
+  .header__subtitle {
+    opacity: 0;
+  }
+}
