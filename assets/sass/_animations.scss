@@ -1,14 +1,3 @@
-.header__logo {
-  transition: .1s all ease-in-out;
-  @media screen and (min-width: $medium) {
-    transition: none;
-  }
-}
-
-header {
-  transition: .2s padding ease-in-out;
-}
-
 .main--smaller {
   margin-top:130px;
 }
@@ -31,8 +20,9 @@ header {
   }
 }
 
+
 .main-nav-scrolled {
-  height:100px;
+  height:75px;
   padding: .25em;
   position: fixed;
   z-index: 100;
@@ -44,7 +34,12 @@ header {
   animation-name: drop;
 	animation-duration: .7s;
   animation-fill-mode: both;
+  border-bottom: 1px solid white;
+  .header__container a {
+    display: inherit;
+  }
   @media screen and (min-width: $medium) {
+    height:85px;
     text-align: center;
   }
   .header__logo {
@@ -52,12 +47,16 @@ header {
     top:-20px;
     position:relative;
     float: left;
-    @media screen and (min-width: $small) {
-      width: 125px;
-    }
+    width: 100px;
     @media screen and (min-width: $medium) {
       margin-left: 0;
       left: 37%;
+    }
+  }
+  .header__logo {
+    margin-top: .25em;
+    @media screen and (min-width: $medium) {
+      margin-top: .15em;
     }
   }
   .header__info {
@@ -75,7 +74,7 @@ header {
   }
   .header__title {
     font-size: 1.5em;
-    margin-top: 1em;
+    margin-top: .6em;
     &:after {
       content: none;
     }
