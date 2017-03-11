@@ -13,8 +13,25 @@ header {
   margin-top:130px;
 }
 
+@keyframes drop {
+	from {
+    transform: translate3d(0, -100%, 0);
+    visibility: visible;
+  }
 
-.header--smaller {
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.body-nav-scrolled {
+  margin-top: 340px;
+  @media screen and (min-width: $medium) {
+    margin-top: 430px;
+  }
+}
+
+.main-nav-scrolled {
   height:100px;
   padding: .25em;
   position: fixed;
@@ -24,6 +41,9 @@ header {
   width: 100%;
   box-shadow: inherit;
   opacity: .97;
+  animation-name: drop;
+	animation-duration: .7s;
+  animation-fill-mode: both;
   @media screen and (min-width: $medium) {
     text-align: center;
   }
