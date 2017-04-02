@@ -15,9 +15,9 @@ $(function() {
   });
 });
 
-// Sticky Navigation //
+// Sticky Navigation - Removed until navigation is actually added //
 
-var mn = $("header");
+/*var mn = $("header");
     mns = "main-nav-scrolled";
     bns = "body-nav-scrolled";
     body = $("body");
@@ -31,4 +31,22 @@ $(window).scroll(function() {
     mn.removeClass(mns);
     body.removeClass(bns);
   }
+});*/
+$(window).on('load', function (){
+  $('.owl-carousel').owlCarousel({
+      loop:true,
+      center: true,
+      nav: true,
+      startPosition: 1,
+      margin: 5,
+      responsive:{
+          0:{
+              items:1
+          },
+          600:{
+              items:2
+          },
+      },
+      navText : ['<span>Back</span>','<span>Next</span>'],
+  })
 });

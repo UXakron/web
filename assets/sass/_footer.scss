@@ -18,7 +18,7 @@ footer {
   text-decoration: none;
   display: block;
   margin-top: .5em;
-  margin-bottom: .65em;
+  margin-bottom: 1em;
   padding-left: 45px;
   position: relative;
   transition: color .3s ease-in-out;
@@ -40,7 +40,6 @@ footer {
   font-size: .8em;
   margin-top: 3em;
   padding-top: 1em;
-  border-top: 1px solid white;
 }
 
 .footer__link--twitter {
@@ -54,5 +53,33 @@ footer {
       content: url('../img/email.svg');
       margin-left: 1px;
       top: 3px;
+  }
+}
+
+.footer__link--facebook {
+    &:before {
+      content: url('../img/facebook.svg');
+      margin-left: 3px;
+      top: 0px;
+  }
+}
+
+.footer__link--linkedin {
+    &:before {
+      content: url('../img/linkedin.svg');
+      margin-left: 5px;
+      top: -2px;
+  }
+}
+
+.footer__container__contact {
+  @media screen and (min-width: $small) {
+    display: flex;
+  }
+}
+
+.footer__container__left, .footer__container__right {
+  @media screen and (min-width: $small) {
+    width: 250px;
   }
 }

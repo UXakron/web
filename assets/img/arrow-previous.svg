@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1280px" height="1280px" viewBox="0 0 1280 1280" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>noun_842237_cc</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="1" y="1" width="1280" height="1280"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="1280" height="1280" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="noun_842237_cc" transform="translate(640.000000, 640.000000) rotate(-360.000000) translate(-640.000000, -640.000000) translate(-1.000000, -1.000000)">
+            <use id="Rectangle" stroke="#979797" mask="url(#mask-2)" stroke-width="2" fill="#FFFFFF" xlink:href="#path-1"></use>
+            <g id="Group" transform="translate(0.612670, 0.392300)" fill-rule="nonzero" fill="#091A57">
+                <path d="M0.38733,640.6077 L0.38733,0.6077 L640.38733,0.6077 L1280.38737,0.6077 L1280.38737,640.6077 L1280.38737,1280.6077 L640.38733,1280.6077 L0.38733,1280.6077 L0.38733,640.6077 Z M836.8204,1047.7997 C872.74472,1011.8803 902.13733,982.204 902.13733,981.8525 C902.13733,981.501 825.3551,904.4365 731.51017,810.598 L560.88301,639.9827 L730.88377,469.9827 C824.38418,376.4827 900.88515,299.4222 900.88593,298.7371 C900.88793,297.1031 770.65133,166.8577 769.01555,166.8577 C768.32492,166.8577 661.44847,273.1702 531.51233,403.1077 L295.264809,639.3577 L532.13733,876.2327 C662.41722,1006.5139 769.57092,1113.1077 770.25667,1113.1077 C770.94242,1113.1077 800.89611,1083.7191 836.8204,1047.7997 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

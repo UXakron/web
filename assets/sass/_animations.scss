@@ -22,70 +22,41 @@
 
 
 .main-nav-scrolled {
-  height:75px;
+  height:70px;
   padding: .25em;
   position: fixed;
   z-index: 100;
   top: 0;
   left: 0;
   width: 100%;
+  border: none;
   box-shadow: inherit;
   opacity: .97;
   animation-name: drop;
 	animation-duration: .7s;
   animation-fill-mode: both;
-  border-bottom: 1px solid white;
   .header__container a {
     display: inherit;
   }
-  @media screen and (min-width: $medium) {
-    height:85px;
+  .header__container {
     text-align: center;
-  }
-  .header__logo {
-    transform: scale(.5);
-    top:-20px;
-    position:relative;
-    float: left;
-    width: 100px;
-    @media screen and (min-width: $medium) {
-      margin-left: 0;
-      left: 37%;
+    @media screen and (min-width: $small) {
+      text-align: left;
+      max-width: 800px;
     }
   }
   .header__logo {
-    margin-top: .25em;
-    @media screen and (min-width: $medium) {
-      margin-top: .15em;
+    width:50px;
+    position:relative;
+    padding: .25em;
+    margin-left: inherit;
+    top: 5px;
+    margin-right: auto;
+    @media screen and (min-width: $small) {
+      margin-left: 0;
     }
   }
   .header__info {
-    float: left;
-    width: 59%;
-    @media screen and (min-width: $tiny) {
-      width: 70%;
-    }
-    @media screen and (min-width: $small) {
-      margin-left: 0;
-    }
-    @media screen and (min-width: $medium) {
-      margin-left: 8%;
-    }
-  }
-  .header__title {
-    font-size: 1.5em;
-    margin-top: .6em;
-    &:after {
-      content: none;
-    }
-    @media screen and (min-width: $small) {
-      margin-top: .8em;
-    }
-    @media screen and (min-width: $medium) {
-      padding-top: 0;
-    }
-  }
-  .header__subtitle {
-    opacity: 0;
+    display: none;
   }
 }
