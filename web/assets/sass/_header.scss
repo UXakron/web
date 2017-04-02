@@ -17,7 +17,7 @@ header {
   }
 }
 
-.header__container a {
+.header__container {
   z-index: 50;
   position: relative;
   @media screen and (min-width: $small) {
