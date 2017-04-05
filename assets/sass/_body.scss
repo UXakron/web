@@ -10,6 +10,10 @@ main {
   max-width: 800px;
   margin: 0 auto;
   padding-bottom: 1.25em;
+  @media screen and (min-width: $large) {
+    max-width: 1000px;
+    padding-right: 100px;
+  }
 }
 
 .paragraph-teaser {
@@ -45,6 +49,10 @@ main {
     background-position: left 150px;
     padding-top: 5.5em;
     padding-bottom: 3em;
+  }
+  @media screen and (min-width: $large) {
+    padding-top:6em;
+    padding-bottom: 3.5em;
   }
 }
 
