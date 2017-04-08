@@ -1,6 +1,8 @@
 .DS_Store
 node_modules
 .sass-cache
-/.env
 /.idea
-/vendor
+
+# These are supposed to be commented out, but are necessary to check in to repository the first time
+# /vendor
+# /.env

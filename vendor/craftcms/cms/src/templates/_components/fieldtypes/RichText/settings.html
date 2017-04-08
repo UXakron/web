@@ -1,0 +1,79 @@
+{% import '_includes/forms' as forms %}
+
+{% if configOptions|length > 1 %}
+    {% set configInput %}
+        {{ forms.select({
+            id: 'configFle',
+            name: 'configFile',
+            options: configOptions,
+            value: field.configFile
+        }) }}
+    {% endset %}
+{% else %}
+    {% set configInput %}
+        <p>{{ 'You don’t have any <a href="http://craftcms.com/docs/rich-text-fields#redactor-configs" target="_blank">Redactor configs</a> yet.'|t('app')|raw }}</p>
+    {% endset %}
+{% endif %}
+
+{{ forms.field({
+    label: "Config"|t('app'),
+    instructions: "You can save custom Redactor configs as .json files in config/redactor/."|t('app')~' <a href="http://imperavi.com/redactor/docs/settings/" target="_blank">'~"View available settings"|t('app')~'</a>.',
+    id: 'configFile'
+}, configInput) }}
+
+{{ forms.checkboxSelectField({
+    id: 'availableVolumes',
+    name: 'availableVolumes',
+    label: 'Available Volumes'|t('app'),
+    instructions: 'The volumes that should be available when selecting assets (if the selected config has an Image or File button).'|t('app'),
+    options: volumeOptions,
+    values: field.availableVolumes,
+    showAllOption: volumeOptions|length ? true : false
+}) }}
+
+{{ forms.checkboxSelectField({
+    id: 'availableTransforms',
+    name: 'availableTransforms',
+    label: 'Available Transforms'|t('app'),
+    instructions: 'The Transforms that should be available for Image selection.'|t('app'),
+    options: transformOptions,
+    values: field.availableTransforms,
+    showAllOption: transformOptions|length ? true : false
+}) }}
+
+
+<hr>
+<a class="fieldtoggle" data-target="advanced">{{ "Advanced"|t('app') }}</a>
+<div id="advanced" class="hidden">
+    {{ forms.checkboxField({
+        label: "Clean up HTML?"|t('app'),
+        instructions: "Removes <code>&lt;span&gt;</code>’s, empty tags, and most <code>style</code> attributes on save."|t('app'),
+        id: 'cleanupHtml',
+        name: 'cleanupHtml',
+        checked: field.cleanupHtml
+    }) }}
+
+    {{ forms.checkboxField({
+        label: "Purify HTML?"|t('app'),
+        instructions: 'Removes any potentially-malicious code on save, by running the submitted data through <a href="http://htmlpurifier.org/" target="_blank">HTML Purifier</a>.'|t('app'),
+        warning: 'Disable this at your own risk!'|t('app'),
+        id: 'purifyHtml',
+        name: 'purifyHtml',
+        checked: field.purifyHtml
+    }) }}
+
+    {% if craft.app.db.isMysql %}
+        {{ forms.selectField({
+            label: "Column Type"|t('app'),
+            id: 'column-type',
+            name: 'columnType',
+            instructions: "The type of column this field should get in the database."|t('app'),
+            options: [
+                { value: 'text', label: 'text (~64KB)' },
+                { value: 'mediumtext', label: 'mediumtext (~16MB)' },
+            ],
+            value: field.columnType,
+            warning: (field.id ? "Changing this may result in data loss."|t('app')),
+        }) }}
+    {% endif %}
+</div>
