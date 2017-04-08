@@ -6,3 +6,4 @@ node_modules
 # These are supposed to be commented out, but are necessary to check in to repository the first time
 # /vendor
 # /.env
+/web/assets/uploads

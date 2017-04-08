@@ -1,0 +1,15 @@
+<footer role="contentinfo">
+  <div class="footer__container">
+    <section class="container">
+      <h3>{{footer.footerTitle}}</h3>
+      <div class="footer__container__contact">
+          {% for block in footer.social %}
+            {% if block.type == "socialNetwork" %}
+              <a class="footer__link footer__link--twitter" href="{{block.socialUrl}}">{{block.socialName}}</a>
+            {% endif %}
+          {% endfor %}
+      </div>
+      <span class="footer__text">{{footer.legal}}</span>
+    </section>
+  </div>
+</footer>

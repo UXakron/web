@@ -10,6 +10,8 @@ return [
     // Base site URL
     'siteUrl' => null,
 
+    'devMode' => true,
+
     // Default Week Start Day (0 = Sunday, 1 = Monday...)
     'defaultWeekStartDay' => 0,
 
@@ -20,8 +22,5 @@ return [
     'omitScriptNameInUrls' => true,
 
     // Control Panel trigger word
-    'cpTrigger' => 'admin',
-
-    // Dev Mode (see https://craftcms.com/support/dev-mode)
-    'devMode' => false,
+    'cpTrigger' => 'admin'
 ];

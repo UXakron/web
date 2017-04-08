@@ -35,6 +35,36 @@ footer {
   }
 }
 
+.footer__link[href*="linkedin.com"] {
+  &:before {
+    content: url('../img/linkedin.svg');
+    margin-left: 5px;
+    top: -2px;
+  }
+}
+
+.footer__link[href*="twitter.com"] {
+  &:before {
+    content: url('../img/twitter.svg');
+  }
+}
+
+.footer__link[href*="facebook.com"] {
+  &:before {
+    content: url('../img/facebook.svg');
+    margin-left: 3px;
+    top: 0px;
+  }
+}
+
+.footer__link[href*="mailto"] {
+  &:before {
+    content: url('../img/email.svg');
+    margin-left: 1px;
+    top: 3px;
+  }
+}
+
 .footer__text {
   display: block;
   font-size: .8em;
@@ -42,44 +72,13 @@ footer {
   padding-top: 1em;
 }
 
-.footer__link--twitter {
-    &:before {
-      content: url('../img/twitter.svg');
-  }
-}
-
-.footer__link--email {
-    &:before {
-      content: url('../img/email.svg');
-      margin-left: 1px;
-      top: 3px;
-  }
-}
-
-.footer__link--facebook {
-    &:before {
-      content: url('../img/facebook.svg');
-      margin-left: 3px;
-      top: 0px;
-  }
-}
-
-.footer__link--linkedin {
-    &:before {
-      content: url('../img/linkedin.svg');
-      margin-left: 5px;
-      top: -2px;
-  }
-}
-
 .footer__container__contact {
   @media screen and (min-width: $small) {
     display: flex;
-  }
-}
-
-.footer__container__left, .footer__container__right {
-  @media screen and (min-width: $small) {
-    width: 250px;
+    flex-wrap: wrap;
+    width: 350px;
+    .footer__link {
+      width: 50%;
+    }
   }
 }

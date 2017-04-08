@@ -51,9 +51,6 @@ module.exports = function(grunt) {
       css: {
 				files: '**/sass/*.scss',
 				tasks: ['sass', 'autoprefixer'],
-        options: {
-          livereload: true,
-        },
 			},
       js: {
 				files: '**/js/*.js',
@@ -70,7 +67,12 @@ module.exports = function(grunt) {
           spawn: false,
           livereload: true
         }
-      }
+      },
+      livereload: {
+        options: { livereload: true },
+        // livereload watches only the compiled dest
+        files: ['assets/css/style.css'],
+      },
     }
   });
 

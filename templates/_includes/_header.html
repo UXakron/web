@@ -1,0 +1,14 @@
+<header role="banner">
+    <div class="header__container">
+        {% for logo in header.logo %}
+          <img class="header__logo" src="{{logo.url}}" alt="{{logo.title}}" />
+        {% endfor %}
+        <div class="header__info">
+          <a href="#top">
+            <h1 class="header__title">{{header.siteName}}</h1>
+          </a>
+          <h2 class="
+          header__subtitle">{{header.tagline}}</h2>
+        </div>
+    </div>
+</header>
