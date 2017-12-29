@@ -1,0 +1,84 @@
+<footer>
+  <div class="footer__container">
+    <section class="container">
+      <h3>Contact Us</h3>
+      <div class="footer__container__contact">
+        <div class="footer__container__left">
+          <a class="footer__link footer__link--twitter" href="http://www.twitter.com/uxakron">@uxakron</a>
+          <a class="footer__link footer__link--email" href="mailto:hello@uxakron.com">hello@uxakron.com</a>
+        </div>
+        <div class="footer__container__right">
+          <a class="footer__link footer__link--facebook" href="http://www.facebook.com/uxakron">Facebook</a>
+          <a class="footer__link footer__link--linkedin" href="https://www.linkedin.com/company/ux-akron">LinkedIn</a>
+        </div>
+      </div>
+      <span class="footer__text">Copyright 2017 UX Akron</span>
+    </section>
+  </div>
+</footer>
+
+<script src="//localhost:35729/livereload.js"></script>
+
+<script async>
+(function(w){
+"use strict";
+var loadCSS = function( href, before, media ){
+  var doc = w.document;
+  var ss = doc.createElement( "link" );
+  var ref;
+  if( before ){
+    ref = before;
+  }
+  else {
+    var refs = ( doc.body || doc.getElementsByTagName( "head" )[ 0 ] ).childNodes;
+    ref = refs[ refs.length - 1];
+  }
+
+  var sheets = doc.styleSheets;
+  ss.rel = "stylesheet";
+  ss.href = href;
+  ss.media = "only x";
+
+  ref.parentNode.insertBefore( ss, ( before ? ref : ref.nextSibling ) );
+  var onloadcssdefined = function( cb ){
+    var resolvedHref = ss.href;
+    var i = sheets.length;
+    while( i-- ){
+      if( sheets[ i ].href === resolvedHref ){
+        return cb();
+      }
+    }
+    setTimeout(function() {
+      onloadcssdefined( cb );
+    });
+  };
+  ss.onloadcssdefined = onloadcssdefined;
+  onloadcssdefined(function() {
+    ss.media = media || "all";
+  });
+  return ss;
+};
+if( typeof module !== "undefined" ){
+  module.exports = loadCSS;
+}
+else {
+  w.loadCSS = loadCSS;
+}
+}( typeof global !== "undefined" ? global : this ));
+loadCSS( "assets/css/style.css" );
+loadCSS( "https://fonts.googleapis.com/css?family=Overpass:300,400,400i,900" );
+</script>
+<!-- Google Analytics -->
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-91910616-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+<!-- End Google Analytics -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="assets/js/min/scripts-min.js"></script>
+<noscript>
+<link href="assets/css/style.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Overpass:300,400,400i,900" rel="stylesheet">
+</noscript>

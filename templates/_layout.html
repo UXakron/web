@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    {% include '_includes/_metadata.html' %}
+  <body>
+    {{ adminbar() }}
+    {% include '_includes/_header.html' %}
+    <main>
+      {% block content %}
+      {% endblock %}
+    </main>
+    {% include '_includes/_footer.html' %}
+  </body>
+</html>
