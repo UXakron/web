@@ -2,5 +2,5 @@
 /.idea
 /vendor
 .DS_Store
-web/node_modules
+uxakron.com/node_modules
 .sass-cache
