@@ -1,0 +1,52 @@
+{% for block in entry.contentMatrix %}
+  {% if block.type == "textBlock" %}
+
+  {% if block.style == "light" %}
+    <section class="photo-teaser">
+  {% elseif block.style == "dark" %}
+    <section class="container paragraph-teaser">
+  {% endif %}
+
+    {% if block.style == "dark" %}
+    <div class="paragraph-teaser__container"
+    {% if block.icon | length %}
+      {% for image in block.icon %}
+        style="background-image: url('{{image.url}}')"
+      {% endfor %}
+    {% endif %}
+    >
+    {% elseif block.style == "light" %}
+    <div class="container photo-teaser__text">
+    {% endif %}
+
+    {% if block.heading | length %}
+      <h3>{{ block.heading }}</h3>
+    {% endif %}
+
+    {% if block.paragraph | length %}
+      {{ block.paragraph }}
+    {% endif %}
+
+    {% if block.components | length %}
+      {% for component in block.components %}
+        {% if component == "contactForm" %}
+          {% include '_includes/_contactform.html' %}
+        {% endif %}
+        {% if component == "eventsList" %}
+          {% include '_includes/_events.html' %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% if block.externalLink | length %}
+      {% for row in block.externalLink %}
+          <a class="button" href="{{row.linkUrl}}">{{row.linkName}}</a>
+      {% endfor %}
+    {% endif %}
+
+    </div>
+  </section>
+
+  {% endif %}
+
+{% endfor %}

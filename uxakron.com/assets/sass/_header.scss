@@ -1,7 +1,7 @@
 header {
   color: white;
   background-color: $darkblue;
-  background-image: url('../img/pattern-newer.jpg');
+  background-image: url('/assets/img/pattern-newer.jpg');
   padding: 2em;
   background-size: 100px auto;
   border-bottom: 5px solid white;
@@ -18,7 +18,7 @@ header {
 }
 
 .header__container {
-  @media screen and (min-width: $small-ish) {
+  @media screen and (min-width: $small) {
     max-width:800px;
     margin:0px auto;
     display:flex;

@@ -4,15 +4,14 @@
       <h3>Contact Us</h3>
       <div class="footer__container__contact">
         <div class="footer__container__left">
-          <a class="footer__link footer__link--twitter" href="http://www.twitter.com/uxakron">@uxakron</a>
-          <a class="footer__link footer__link--email" href="mailto:hello@uxakron.com">hello@uxakron.com</a>
-        </div>
-        <div class="footer__container__right">
-          <a class="footer__link footer__link--facebook" href="http://www.facebook.com/uxakron">Facebook</a>
-          <a class="footer__link footer__link--linkedin" href="https://www.linkedin.com/company/ux-akron">LinkedIn</a>
+        {% for block in footer.socialMedia %}
+    		    {% if block.type == "socialMediaBlock" %}
+    		        <a class="footer__link footer__link--{{ block.socialName }}" href= "{{block.address}}">{{ block.socialName.label }}</a>
+    		    {% endif %}
+    		{% endfor %}
         </div>
       </div>
-      <span class="footer__text">Copyright 2017 UX Akron</span>
+      <span class="footer__text">© {{ "now"|date("Y") }} {{footer.supplemental}}</span>
     </section>
   </div>
 </footer>

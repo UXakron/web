@@ -17,7 +17,7 @@ footer {
   @media screen and (min-width: $large) {
     padding-left: 100px;
     padding-right: auto;
-    padding-top: 3em;
+    padding-top: 1em;
   }
 }
 
@@ -30,6 +30,9 @@ footer {
   padding-left: 45px;
   position: relative;
   transition: color .3s ease-in-out;
+  @media screen and (min-width: $small) {
+    width: 50%;
+  }
   &:hover {
     color: $cyan;
   }
@@ -52,13 +55,13 @@ footer {
 
 .footer__link--twitter {
     &:before {
-      content: url('../img/twitter.svg');
+      content: url('/assets/img/twitter.svg');
   }
 }
 
 .footer__link--email {
     &:before {
-      content: url('../img/email.svg');
+      content: url('/assets/img/email.svg');
       margin-left: 1px;
       top: 3px;
   }
@@ -66,7 +69,7 @@ footer {
 
 .footer__link--facebook {
     &:before {
-      content: url('../img/facebook.svg');
+      content: url('/assets/img/facebook.svg');
       margin-left: 3px;
       top: 0px;
   }
@@ -74,7 +77,7 @@ footer {
 
 .footer__link--linkedin {
     &:before {
-      content: url('../img/linkedin.svg');
+      content: url('/assets/img/linkedin.svg');
       margin-left: 5px;
       top: -2px;
   }
@@ -88,6 +91,9 @@ footer {
 
 .footer__container__left, .footer__container__right {
   @media screen and (min-width: $small) {
-    width: 250px;
+    width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
 }
