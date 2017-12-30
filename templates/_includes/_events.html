@@ -5,7 +5,7 @@
   <li>
     <a class="event-list__item" href="{{event.urlLink}}">
     {% for image in event.featureImage %}
-      <img src="{{image.url}}" class="event-list__item__image" alt="{{image.title}}" />
+      <img src="{{image.url('eventTeaser')}}" class="event-list__item__image" alt="{{image.title}}" />
     {% endfor %}
     <div class="event-list__item__text">
       <h6>{{event.eventDate|date("m/d/Y")}} @ {{event.startingTime|date("g:i a")}}</h6>
