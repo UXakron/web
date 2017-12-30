@@ -1,7 +1,21 @@
 <!-- Event Block -->
 <div class="event-list__container">
 <ul class="event-list owl-carousel owl-theme">
+  {% for event in craft.entries.section('event').limit(3) %}
   <li>
+    <a class="event-list__item" href="{{event.urlLink}}">
+    {% for image in event.featureImage %}
+      <img src="{{image.url}}" class="event-list__item__image" alt="{{image.title}}" />
+    {% endfor %}
+    <div class="event-list__item__text">
+      <h6>{{event.eventDate|date("m/d/Y")}} @ {{event.startingTime|date("g:i a")}}</h6>
+      <h5>{{ event.title}}</h5>
+      <p>{{ event.summary}}</p>
+    </div>
+    </a>
+  </li>
+  {% endfor %}
+  <!--<li>
     <a class="event-list__item" href="https://www.meetup.com/uxakron/events/242923154/">
     <img src="assets/img/design-team.jpg" class="event-list__item__image" alt="A design team works together at a table." />
     <div class="event-list__item__text">
@@ -30,7 +44,7 @@
       <p>Join us for a workshop on simple user experience techniques and studies. Held at the Kent State University Library and facilitated by Carol Smith of IBM.</p>
     </div>
     </a>
-  </li>
+  </li>-->
 </ul>
 </div>
 <!-- End Event Block -->
