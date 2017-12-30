@@ -1,7 +1,7 @@
 <!-- Event Block -->
 <div class="event-list__container">
 <ul class="event-list owl-carousel owl-theme">
-  {% for event in craft.entries.section('event').limit(3) %}
+  {% for event in craft.entries.section('event').orderby('eventDate').limit(3) %}
   <li>
     <a class="event-list__item" href="{{event.urlLink}}">
     {% for image in event.featureImage %}
