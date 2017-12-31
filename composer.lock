@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "db278be1997014355cb7eafd6566dd2d",
+    "content-hash": "7a7997ef73d0ef755e345cf9393df2ad",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -1513,11 +1513,11 @@
         },
         {
             "name": "nystudio107/craft3-imageoptimize",
-            "version": "1.4.6",
+            "version": "1.4.7",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nystudio107/craft3-imageoptimize/zipball/9df0712d03bc5ababe82f83dfce9937d00f2f810",
-                "reference": "9df0712d03bc5ababe82f83dfce9937d00f2f810",
+                "url": "https://api.github.com/repos/nystudio107/craft3-imageoptimize/zipball/ea8e702f9bb370e52645134a35bb2a6b084be4ee",
+                "reference": "ea8e702f9bb370e52645134a35bb2a6b084be4ee",
                 "shasum": ""
             },
             "require": {
@@ -1574,7 +1574,7 @@
                 "docs": "https://github.com/nystudio107/craft3-imageoptimize/blob/master/README.md",
                 "issues": "https://github.com/nystudio107/craft3-imageoptimize/issues"
             },
-            "time": "2017-12-27T14:42:01+00:00"
+            "time": "2017-12-29T20:08:29+00:00"
         },
         {
             "name": "paragonie/random_compat",

@@ -1,11 +1,11 @@
 <!-- Event Block -->
 <div class="event-list__container">
 <ul class="event-list owl-carousel owl-theme">
-  {% for event in craft.entries.section('event').orderby('eventDate').limit(3) %}
+  {% for event in craft.entries.section('event').orderBy('eventDate desc').limit(3) %}
   <li>
     <a class="event-list__item" href="{{event.urlLink}}">
     {% for image in event.featureImage %}
-      <img src="{{image.url('eventTeaser')}}" class="event-list__item__image" alt="{{image.title}}" />
+      <img src="{{image.getUrl('eventTeaser')}}" class="event-list__item__image" alt="{{image.title}}" />
     {% endfor %}
     <div class="event-list__item__text">
       <h6>{{event.eventDate|date("m/d/Y")}} @ {{event.startingTime|date("g:i a")}}</h6>

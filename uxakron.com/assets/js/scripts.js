@@ -37,7 +37,7 @@ $(window).on('load', function (){
       loop:true,
       center: true,
       nav: true,
-      startPosition: 1,
+      startPosition: 3,
       margin: 5,
       responsive:{
           0:{
