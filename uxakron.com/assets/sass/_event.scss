@@ -5,7 +5,7 @@
 }
 
 .event-list__item {
-  background-color: $lightgray;
+  //background-color: $lightgray;
   display: block;
   text-decoration: none;
   color: $darkgray;
@@ -15,7 +15,7 @@
   width: 100%;
   transition: background-color .3s ease-in-out;
   &:hover, &:focus {
-    background-color: darken($lightgray,3%);
+    //background-color: darken($lightgray,3%);
     h6:after {
       border-color: $darkblue transparent transparent transparent;
     }
@@ -48,12 +48,12 @@
   padding: 1em 1em 1.5em 1em;
   margin-left: 1em;
   margin-right: 1em;
-  min-height:230px;
+  //min-height:230px;
   @media screen and (min-width: $small) {
-    min-height:260px;
+    //min-height:260px;
   }
   @media screen and (min-width: $medium) {
-    min-height:210px;
+    //min-height:210px;
   }
   p {
     font-size: .95em;
