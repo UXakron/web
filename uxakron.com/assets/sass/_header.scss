@@ -2,18 +2,18 @@ header {
   color: white;
   background-color: $darkblue;
   background-image: url('/assets/img/pattern-newer.jpg');
-  padding: 2em;
-  background-size: 100px auto;
+  padding: 0 0 2em 2em;
+  background-size: 110px auto;
   border-bottom: 5px solid white;
   box-shadow: 8px 8px 3px rgba(0,0,0,1);
   position: relative;
   @media screen and (min-width: $small) {
-    padding: 4em 1.5em 4em 1.5em;
+    padding: 0em 1.5em 4em 1.5em;
   }
   @media screen and (min-width: $medium) {
     align-items: center;
-    background-size: 110px auto;
-    padding: 3.75em 2em 7em 2em;
+    background-size: 130px auto;
+    padding: 0em 2em 7em 2em;
   }
 }
 
@@ -68,7 +68,7 @@ header {
   @media screen and (min-width: $medium) {
     width: 290px;
     z-index: 50;
-    margin-left: 11%;
+    margin-left: 9.5%;
     top: 1.9em;
     position: relative;
   }

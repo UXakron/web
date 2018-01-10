@@ -1,0 +1,61 @@
+nav {
+  //background-color: $lightblue;
+  display: flex;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-bottom: 3em;
+  background-image: url('/assets/img/nav-container.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: .75em 1.25em .75em 80px;
+  position: relative;
+  @media screen and (min-width: $small) {
+    padding: 1em 2em 2em 100px;
+  }
+  &:after {
+    content:"";
+    width: 50px;
+    display: block;
+    right: 0;
+    position: absolute;
+    top: 0;
+  }
+}
+
+.nav__logo {
+  background-image: url('/assets/img/ux-mark-white.svg');
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 25px;
+  width: 25px;
+  max-width: 25px;
+  margin-right: 50px;
+}
+
+.nav__logo span {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+.nav__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: inline-flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  font-weight: bold;
+  font-size: .95em;
+  letter-spacing: .5px;
+}
+
+.nav__list-item__link {
+  color: white;
+  text-decoration: none;
+}
