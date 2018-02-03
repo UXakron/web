@@ -1,4 +1,4 @@
-nav {
+.nav__main {
   //background-color: $lightblue;
   display: flex;
   max-width: 800px;
@@ -14,7 +14,7 @@ nav {
   }
   &:after {
     content:"";
-    width: 50px;
+    width: 51px;
     display: block;
     right: 0;
     position: absolute;

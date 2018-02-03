@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a7997ef73d0ef755e345cf9393df2ad",
+    "content-hash": "df5787fed6c5b628af4dad3bcc078231",
     "packages": [
         {
             "name": "cebe/markdown",
@@ -60,49 +60,6 @@
                 "markdown-extra"
             ],
             "time": "2017-07-16T21:13:23+00:00"
-        },
-        {
-            "name": "cloudinary/cloudinary_php",
-            "version": "1.8.0",
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cloudinary/cloudinary_php/zipball/641b0901ca616c540b773abb802987a502aa8b89",
-                "reference": "641b0901ca616c540b773abb802987a502aa8b89",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "ext-json": "*",
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "src"
-                ],
-                "files": [
-                    "src/Helpers.php"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Cloudinary",
-                    "homepage": "https://github.com/cloudinary/cloudinary_php/graphs/contributors"
-                }
-            ],
-            "description": "Cloudinary PHP SDK",
-            "homepage": "https://github.com/cloudinary/cloudinary_php",
-            "keywords": [
-                "cdn",
-                "cloud",
-                "cloudinary",
-                "image management",
-                "sdk"
-            ],
-            "time": "2017-05-03T14:29:33+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -286,18 +243,18 @@
         },
         {
             "name": "composer/spdx-licenses",
-            "version": "1.1.6",
+            "version": "1.3.0",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/spdx-licenses/zipball/2603a0d7ddc00a015deb576fa5297ca43dee6b1c",
-                "reference": "2603a0d7ddc00a015deb576fa5297ca43dee6b1c",
+                "url": "https://api.github.com/repos/composer/spdx-licenses/zipball/7e111c50db92fa2ced140f5ba23b4e261bc77a30",
+                "reference": "7e111c50db92fa2ced140f5ba23b4e261bc77a30",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.3.2 || ^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.5 || ^5.0.5",
+                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.5",
                 "phpunit/phpunit-mock-objects": "2.3.0 || ^3.0"
             },
             "type": "library",
@@ -338,65 +295,15 @@
                 "spdx",
                 "validator"
             ],
-            "time": "2017-04-03T19:08:52+00:00"
-        },
-        {
-            "name": "craftcms/ckeditor",
-            "version": "1.0.0-beta.1",
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/craftcms/ckeditor/zipball/768725bc698b3cf95b7f00f9422ea641dc941fa5",
-                "reference": "768725bc698b3cf95b7f00f9422ea641dc941fa5",
-                "shasum": ""
-            },
-            "require": {
-                "craftcms/cms": "^3.0.0-RC1"
-            },
-            "type": "craft-plugin",
-            "extra": {
-                "name": "CKEditor",
-                "handle": "ckeditor",
-                "changelogUrl": "https://raw.githubusercontent.com/craftcms/ckeditor/master/CHANGELOG.md",
-                "downloadUrl": "https://github.com/craftcms/ckeditor/archive/master.zip"
-            },
-            "autoload": {
-                "psr-4": {
-                    "craft\\ckeditor\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Pixel & Tonic",
-                    "homepage": "https://pixelandtonic.com/"
-                }
-            ],
-            "description": "Edit rich text content in Craft CMS using CKEditor.",
-            "keywords": [
-                "ckeditor",
-                "cms",
-                "craftcms",
-                "html",
-                "yii2"
-            ],
-            "support": {
-                "email": "support@craftcms.com",
-                "issues": "https://github.com/craftcms/ckeditor/issues?state=open",
-                "source": "https://github.com/craftcms/ckeditor",
-                "docs": "https://github.com/craftcms/ckeditor",
-                "rss": "https://github.com/craftcms/ckeditor/commits/master.atom"
-            },
-            "time": "2017-12-04T21:07:23+00:00"
+            "time": "2018-01-31T13:17:27+00:00"
         },
         {
             "name": "craftcms/cms",
-            "version": "3.0.0-RC3",
+            "version": "3.0.0-RC8",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craftcms/cms/zipball/fbecf432a08ef457667234ea938218031f1a4e6e",
-                "reference": "fbecf432a08ef457667234ea938218031f1a4e6e",
+                "url": "https://api.github.com/repos/craftcms/cms/zipball/952585f7b1afc1905368c2c22457049e2e6f80d6",
+                "reference": "952585f7b1afc1905368c2c22457049e2e6f80d6",
                 "shasum": ""
             },
             "require": {
@@ -406,7 +313,8 @@
                 "craftcms/server-check": "~1.1.0",
                 "creocoder/yii2-nested-sets": "~0.9.0",
                 "danielstjules/stringy": "~3.1.0",
-                "enshrined/svg-sanitize": "~0.7.2",
+                "elvanto/litemoji": "^1.3.1",
+                "enshrined/svg-sanitize": "~0.8.2",
                 "ext-curl": "*",
                 "ext-dom": "*",
                 "ext-json": "*",
@@ -464,7 +372,7 @@
                 "craftcms",
                 "yii2"
             ],
-            "time": "2017-12-19T18:07:14+00:00"
+            "time": "2018-01-30T18:59:17+00:00"
         },
         {
             "name": "craftcms/oauth2-craftid",
@@ -550,11 +458,11 @@
         },
         {
             "name": "craftcms/redactor",
-            "version": "1.0.0.1",
+            "version": "1.0.1",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craftcms/redactor/zipball/0225ce422ab76a21b003d5dde6a7a3813a05b4ca",
-                "reference": "0225ce422ab76a21b003d5dde6a7a3813a05b4ca",
+                "url": "https://api.github.com/repos/craftcms/redactor/zipball/0ca795da09e06f50edbc7a99f36b9359ad9e72ed",
+                "reference": "0ca795da09e06f50edbc7a99f36b9359ad9e72ed",
                 "shasum": ""
             },
             "require": {
@@ -596,7 +504,7 @@
                 "docs": "https://github.com/craftcms/redactor",
                 "rss": "https://github.com/craftcms/redactor/commits/master.atom"
             },
-            "time": "2017-12-11T03:18:41+00:00"
+            "time": "2018-01-25T02:45:45+00:00"
         },
         {
             "name": "craftcms/server-check",
@@ -815,12 +723,45 @@
             "time": "2017-11-15T23:40:40+00:00"
         },
         {
-            "name": "enshrined/svg-sanitize",
-            "version": "0.7.2",
+            "name": "elvanto/litemoji",
+            "version": "1.3.1",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/darylldoyle/svg-sanitizer/zipball/2768fb1c8868d97145e8f2a5457caf590c8d2062",
-                "reference": "2768fb1c8868d97145e8f2a5457caf590c8d2062",
+                "url": "https://api.github.com/repos/elvanto/litemoji/zipball/fc1d2b8b3d174ee9425ac506430377dc3b50cdfb",
+                "reference": "fc1d2b8b3d174ee9425ac506430377dc3b50cdfb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "milesj/emojibase": "*",
+                "phpunit/phpunit": "^5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "LitEmoji\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A PHP library simplifying the conversion of unicode, HTML and shortcode emoji.",
+            "keywords": [
+                "emoji",
+                "php-emoji"
+            ],
+            "time": "2017-10-09T01:54:36+00:00"
+        },
+        {
+            "name": "enshrined/svg-sanitize",
+            "version": "0.8.2",
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/darylldoyle/svg-sanitizer/zipball/432fc4fc7e95b8a866790ba27e35076b9dd96ebe",
+                "reference": "432fc4fc7e95b8a866790ba27e35076b9dd96ebe",
                 "shasum": ""
             },
             "require-dev": {
@@ -844,7 +785,7 @@
                 }
             ],
             "description": "An SVG sanitizer for PHP",
-            "time": "2017-08-31T00:10:18+00:00"
+            "time": "2017-12-06T15:31:26+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -1055,68 +996,6 @@
             "time": "2017-03-20T17:10:46+00:00"
         },
         {
-            "name": "imageoptim/imageoptim",
-            "version": "1.3.1",
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ImageOptim/php-imageoptim-api/zipball/b73eb5d6747fc181de86b2de50fb158dff463618",
-                "reference": "b73eb5d6747fc181de86b2de50fb158dff463618",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.4 || ^7.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ImageOptim\\": "src"
-                }
-            },
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Kornel",
-                    "email": "kornel@imageoptim.com"
-                }
-            ],
-            "description": "ImageOptim API for PHP",
-            "homepage": "https://imageoptim.com/api",
-            "keywords": [
-                "image",
-                "optimize",
-                "performance",
-                "resize",
-                "scale"
-            ],
-            "time": "2017-01-09T23:58:20+00:00"
-        },
-        {
-            "name": "imgix/imgix-php",
-            "version": "1.1.0",
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/imgix/imgix-php/zipball/6caef36aec0a80ba5c79d1cc2859c703f12d1494",
-                "reference": "6caef36aec0a80ba5c79d1cc2859c703f12d1494",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Imgix\\": "src/"
-                }
-            },
-            "description": "A PHP client library for generating URLs with imgix.",
-            "keywords": [
-                "imgix"
-            ],
-            "time": "2016-02-25T19:46:23+00:00"
-        },
-        {
             "name": "justinrainbow/json-schema",
             "version": "5.2.6",
             "dist": {
@@ -1178,86 +1057,12 @@
             "time": "2017-10-21T13:15:38+00:00"
         },
         {
-            "name": "kraken-io/kraken-php",
-            "version": "1.6",
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kraken-io/kraken-php/zipball/56563df1b9a7829f7039cc6e712cf89fab655e26",
-                "reference": "56563df1b9a7829f7039cc6e712cf89fab655e26",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "ext-json": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Kraken": "lib"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kraken Image Optimizer",
-                    "email": "support@kraken.io"
-                }
-            ],
-            "description": "Official Kraken.io SDK",
-            "time": "2016-07-26T08:03:24+00:00"
-        },
-        {
-            "name": "ksubileau/color-thief-php",
-            "version": "v1.3.1",
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ksubileau/color-thief-php/zipball/a673d7d3fa815c70fa4bebdee74d337e9e6944fa",
-                "reference": "a673d7d3fa815c70fa4bebdee74d337e9e6944fa",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "suggest": {
-                "ext-gd": "to use the GD image adapter.",
-                "ext-gmagick": "to use the Gmagick image adapter.",
-                "ext-imagick": "to use the Imagick image adapter."
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "ColorThief\\": "lib/ColorThief"
-                }
-            },
-            "license": [
-                "CC-BY-2.5"
-            ],
-            "authors": [
-                {
-                    "name": "Kevin Subileau",
-                    "homepage": "http://www.kevinsubileau.fr"
-                }
-            ],
-            "description": "Grabs the dominant color or a representative color palette from an image.",
-            "homepage": "http://www.kevinsubileau.fr/projets/color-thief-php",
-            "keywords": [
-                "color",
-                "dominant",
-                "palette",
-                "php",
-                "thief"
-            ],
-            "time": "2016-12-18T03:12:25+00:00"
-        },
-        {
             "name": "league/flysystem",
-            "version": "1.0.41",
+            "version": "1.0.42",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/f400aa98912c561ba625ea4065031b7a41e5a155",
-                "reference": "f400aa98912c561ba625ea4065031b7a41e5a155",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/09eabc54e199950041aef258a85847676496fe8e",
+                "reference": "09eabc54e199950041aef258a85847676496fe8e",
                 "shasum": ""
             },
             "require": {
@@ -1268,12 +1073,13 @@
             },
             "require-dev": {
                 "ext-fileinfo": "*",
-                "mockery/mockery": "~0.9",
-                "phpspec/phpspec": "^2.2",
-                "phpunit/phpunit": "~4.8"
+                "phpspec/phpspec": "^3.4",
+                "phpunit/phpunit": "^5.7"
             },
             "suggest": {
                 "ext-fileinfo": "Required for MimeType",
+                "ext-ftp": "Allows you to use FTP server storage",
+                "ext-openssl": "Allows you to use FTPS server storage",
                 "league/flysystem-aws-s3-v2": "Allows you to use S3 storage with AWS SDK v2",
                 "league/flysystem-aws-s3-v3": "Allows you to use S3 storage with AWS SDK v3",
                 "league/flysystem-azure": "Allows you to use Windows Azure Blob storage",
@@ -1327,7 +1133,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2017-08-06T17:41:04+00:00"
+            "time": "2018-01-27T16:03:56+00:00"
         },
         {
             "name": "league/oauth2-client",
@@ -1460,121 +1266,6 @@
                 "shell"
             ],
             "time": "2017-06-30T06:21:01+00:00"
-        },
-        {
-            "name": "mmikkel/cp-field-inspect",
-            "version": "1.0.2",
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mmikkel/CpFieldInspect-Craft/zipball/9f82dabec47232f4f59b47185c728b5eb2e3e7dd",
-                "reference": "9f82dabec47232f4f59b47185c728b5eb2e3e7dd",
-                "shasum": ""
-            },
-            "require": {
-                "craftcms/cms": "^3.0.0-RC1"
-            },
-            "type": "craft-plugin",
-            "extra": {
-                "name": "CP Field Inspect",
-                "handle": "cp-field-inspect",
-                "schemaVersion": "1.0.0",
-                "hasCpSettings": false,
-                "hasCpSection": false,
-                "changelogUrl": "https://raw.githubusercontent.com/mmikkel/cp-field-inspect/master/CHANGELOG.md",
-                "class": "mmikkel\\cpfieldinspect\\CpFieldInspect"
-            },
-            "autoload": {
-                "psr-4": {
-                    "mmikkel\\cpfieldinspect\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mats Mikkel Rummelhoff",
-                    "homepage": "http://mmikkel.no"
-                }
-            ],
-            "description": "Inspect field handles and easily edit field settings",
-            "keywords": [
-                "cms",
-                "cp field inspect",
-                "craft",
-                "craft-plugin",
-                "craftcms"
-            ],
-            "support": {
-                "docs": "https://github.com/mmikkel/cp-field-inspect/blob/master/README.md",
-                "issues": "https://github.com/mmikkel/cp-field-inspect/issues"
-            },
-            "time": "2017-12-07T00:38:50+00:00"
-        },
-        {
-            "name": "nystudio107/craft3-imageoptimize",
-            "version": "1.4.7",
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nystudio107/craft3-imageoptimize/zipball/ea8e702f9bb370e52645134a35bb2a6b084be4ee",
-                "reference": "ea8e702f9bb370e52645134a35bb2a6b084be4ee",
-                "shasum": ""
-            },
-            "require": {
-                "cloudinary/cloudinary_php": "^1.8.0",
-                "craftcms/cms": "^3.0.0-RC3",
-                "imageoptim/imageoptim": "^1.0.0",
-                "imgix/imgix-php": "^1.1.0",
-                "kraken-io/kraken-php": "^1.2",
-                "ksubileau/color-thief-php": "^1.3",
-                "mikehaertl/php-shellcommand": "~1.2"
-            },
-            "type": "craft-plugin",
-            "extra": {
-                "name": "ImageOptimize",
-                "handle": "image-optimize",
-                "schemaVersion": "1.0.0",
-                "hasCpSettings": true,
-                "hasCpSection": false,
-                "changelogUrl": "https://raw.githubusercontent.com/nystudio107/craft3-imageoptimize/master/CHANGELOG.md",
-                "components": {
-                    "optimize": "nystudio107\\imageoptimize\\services\\Optimize",
-                    "optimizedImages": "nystudio107\\imageoptimize\\services\\OptimizedImages",
-                    "placeholder": "nystudio107\\imageoptimize\\services\\Placeholder"
-                },
-                "class": "nystudio107\\imageoptimize\\ImageOptimize"
-            },
-            "autoload": {
-                "psr-4": {
-                    "nystudio107\\imageoptimize\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "nystudio107",
-                    "homepage": "https://nystudio107.com"
-                }
-            ],
-            "description": "Automatically create & optimize responsive image transforms, using either native Craft transforms or a service like Imgix, with zero template changes.",
-            "keywords": [
-                "cms",
-                "craft",
-                "craft-plugin",
-                "craftcms",
-                "image",
-                "image-variants",
-                "imgix",
-                "optimize",
-                "optimize-images"
-            ],
-            "support": {
-                "docs": "https://github.com/nystudio107/craft3-imageoptimize/blob/master/README.md",
-                "issues": "https://github.com/nystudio107/craft3-imageoptimize/issues"
-            },
-            "time": "2017-12-29T20:08:29+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -1760,17 +1451,67 @@
             "time": "2016-10-10T12:19:37+00:00"
         },
         {
+            "name": "rias/craft-width-fieldtype",
+            "version": "1.0.0",
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Rias500/craft-width-fieldtype/zipball/09614cf9d274e3d2a427112213749147316ce507",
+                "reference": "09614cf9d274e3d2a427112213749147316ce507",
+                "shasum": ""
+            },
+            "require": {
+                "craftcms/cms": "^3.0.0-RC1"
+            },
+            "type": "craft-plugin",
+            "extra": {
+                "name": "Width Fieldtype",
+                "handle": "width-fieldtype",
+                "schemaVersion": "1.0.0",
+                "hasCpSettings": false,
+                "hasCpSection": false,
+                "changelogUrl": "https://raw.githubusercontent.com/Rias500/width-fieldtype/master/CHANGELOG.md",
+                "class": "rias\\widthfieldtype\\WidthFieldtype"
+            },
+            "autoload": {
+                "psr-4": {
+                    "rias\\widthfieldtype\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rias",
+                    "homepage": "https://rias.be"
+                }
+            ],
+            "description": "Let users choose from predefined widths",
+            "keywords": [
+                "cms",
+                "craft",
+                "craft-plugin",
+                "craftcms",
+                "width fieldtype"
+            ],
+            "support": {
+                "docs": "https://github.com/Rias500/width-fieldtype/blob/master/README.md",
+                "issues": "https://github.com/Rias500/width-fieldtype/issues"
+            },
+            "time": "2018-01-30T14:58:12+00:00"
+        },
+        {
             "name": "roave/security-advisories",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "0703d860f83775029738dc4a519301e8e3d81853"
+                "reference": "a5ff7ff05264c8796ffb1b7b6fdde43a9c6b0776"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/0703d860f83775029738dc4a519301e8e3d81853",
-                "reference": "0703d860f83775029738dc4a519301e8e3d81853",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/a5ff7ff05264c8796ffb1b7b6fdde43a9c6b0776",
+                "reference": "a5ff7ff05264c8796ffb1b7b6fdde43a9c6b0776",
                 "shasum": ""
             },
             "conflict": {
@@ -1784,9 +1525,10 @@
                 "codeigniter/framework": "<=3.0.6",
                 "composer/composer": "<=1.0.0-alpha11",
                 "contao-components/mediaelement": ">=2.14.2,<2.21.1",
-                "contao/core": ">=2,<3.5.31",
+                "contao/core": ">=2,<3.5.32",
                 "contao/core-bundle": ">=4,<4.4.8",
                 "contao/listing-bundle": ">=4,<4.4.8",
+                "contao/newsletter-bundle": ">=4,<4.1",
                 "doctrine/annotations": ">=1,<1.2.7",
                 "doctrine/cache": ">=1,<1.3.2|>=1.4,<1.4.2",
                 "doctrine/common": ">=2,<2.4.3|>=2.5,<2.5.1",
@@ -1821,16 +1563,16 @@
                 "oro/platform": ">=1.7,<1.7.4",
                 "phpmailer/phpmailer": ">=5,<5.2.24",
                 "phpunit/phpunit": ">=4.8.19,<4.8.28|>=5.0.10,<5.6.3",
-                "phpxmlrpc/extras": "<6.0.1",
+                "phpxmlrpc/extras": "<0.6.1",
                 "pusher/pusher-php-server": "<2.2.1",
                 "sabre/dav": ">=1.6,<1.6.99|>=1.7,<1.7.11|>=1.8,<1.8.9",
-                "shopware/shopware": "<5.2.25",
+                "shopware/shopware": "<5.3.7",
                 "silverstripe/cms": ">=3,<=3.0.11|>=3.1,<3.1.11",
                 "silverstripe/forum": "<=0.6.1|>=0.7,<=0.7.3",
                 "silverstripe/framework": ">=3,<3.3",
                 "silverstripe/userforms": "<3",
-                "simplesamlphp/saml2": "<1.8.1|>=1.9,<1.9.1|>=1.10,<1.10.3|>=2,<2.3.3",
-                "simplesamlphp/simplesamlphp": "<1.14.16",
+                "simplesamlphp/saml2": "<1.10.4|>=2,<2.3.5|>=3,<3.1.1",
+                "simplesamlphp/simplesamlphp": "<1.15.2",
                 "simplesamlphp/simplesamlphp-module-infocard": "<1.0.1",
                 "socalnick/scn-social-auth": "<1.15.2",
                 "squizlabs/php_codesniffer": ">=1,<2.8.1",
@@ -1853,7 +1595,7 @@
                 "symfony/web-profiler-bundle": ">=2,<2.3.19|>=2.4,<2.4.9|>=2.5,<2.5.4",
                 "symfony/yaml": ">=2,<2.0.22|>=2.1,<2.1.7",
                 "thelia/backoffice-default-template": ">=2.1,<2.1.2",
-                "thelia/thelia": ">=2.1.0-beta1,<2.1.3|>=2.1,<2.1.2",
+                "thelia/thelia": ">=2.1,<2.1.2|>=2.1.0-beta1,<2.1.3",
                 "twig/twig": "<1.20",
                 "typo3/cms": ">=6.2,<6.2.30|>=7,<7.6.22|>=8,<8.7.5",
                 "typo3/flow": ">=1,<1.0.4|>=1.1,<1.1.1|>=2,<2.0.1|>=2.3,<2.3.16|>=3,<3.0.10|>=3.1,<3.1.7|>=3.2,<3.2.7|>=3.3,<3.3.5",
@@ -1902,7 +1644,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2017-12-24T19:52:27+00:00"
+            "time": "2018-01-31T19:36:12+00:00"
         },
         {
             "name": "seld/cli-prompt",
@@ -1949,18 +1691,18 @@
         },
         {
             "name": "seld/jsonlint",
-            "version": "1.6.2",
+            "version": "1.7.1",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/jsonlint/zipball/7a30649c67ee0d19faacfd9fa2cfb6cc032d9b19",
-                "reference": "7a30649c67ee0d19faacfd9fa2cfb6cc032d9b19",
+                "url": "https://api.github.com/repos/Seldaek/jsonlint/zipball/d15f59a67ff805a44c50ea0516d2341740f81a38",
+                "reference": "d15f59a67ff805a44c50ea0516d2341740f81a38",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.3 || ^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.5"
+                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.0"
             },
             "bin": [
                 "bin/jsonlint"
@@ -1989,7 +1731,7 @@
                 "parser",
                 "validator"
             ],
-            "time": "2017-11-30T15:34:22+00:00"
+            "time": "2018-01-24T12:46:19+00:00"
         },
         {
             "name": "seld/phar-utils",
@@ -2082,11 +1824,11 @@
         },
         {
             "name": "symfony/console",
-            "version": "v3.4.2",
+            "version": "v3.4.4",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/9f21adfb92a9315b73ae2ed43138988ee4913d4e",
-                "reference": "9f21adfb92a9315b73ae2ed43138988ee4913d4e",
+                "url": "https://api.github.com/repos/symfony/console/zipball/26b6f419edda16c19775211987651cb27baea7f1",
+                "reference": "26b6f419edda16c19775211987651cb27baea7f1",
                 "shasum": ""
             },
             "require": {
@@ -2097,14 +1839,6 @@
             "conflict": {
                 "symfony/dependency-injection": "<3.4",
                 "symfony/process": "<3.3"
-            },
-            "require-dev": {
-                "psr/log": "~1.0",
-                "symfony/config": "~3.3|~4.0",
-                "symfony/dependency-injection": "~3.4|~4.0",
-                "symfony/event-dispatcher": "~2.8|~3.0|~4.0",
-                "symfony/lock": "~3.4|~4.0",
-                "symfony/process": "~3.3|~4.0"
             },
             "suggest": {
                 "psr/log": "For using the console logger",
@@ -2126,7 +1860,6 @@
                     "/Tests/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2142,28 +1875,28 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-12-14T19:40:10+00:00"
+            "time": "2018-01-29T09:03:43+00:00"
         },
         {
             "name": "symfony/debug",
-            "version": "v3.4.2",
+            "version": "v4.0.4",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/543deab3ffff94402440b326fc94153bae2dfa7a",
-                "reference": "543deab3ffff94402440b326fc94153bae2dfa7a",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/c77bb31d0f6310a2ac11e657475d396a92e5dc54",
+                "reference": "c77bb31d0f6310a2ac11e657475d396a92e5dc54",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.5.9|>=7.0.8",
+                "php": "^7.1.3",
                 "psr/log": "~1.0"
             },
             "conflict": {
-                "symfony/http-kernel": ">=2.3,<2.3.24|~2.4.0|>=2.5,<2.5.9|>=2.6,<2.6.2"
+                "symfony/http-kernel": "<3.4"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.4-dev"
+                    "dev-master": "4.0-dev"
                 }
             },
             "autoload": {
@@ -2189,15 +1922,15 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-12-12T08:27:14+00:00"
+            "time": "2018-01-18T22:19:33+00:00"
         },
         {
             "name": "symfony/filesystem",
-            "version": "v3.4.2",
+            "version": "v3.4.4",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/25b135bea251829e3db6a77d773643408b575ed4",
-                "reference": "25b135bea251829e3db6a77d773643408b575ed4",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/e078773ad6354af38169faf31c21df0f18ace03d",
+                "reference": "e078773ad6354af38169faf31c21df0f18ace03d",
                 "shasum": ""
             },
             "require": {
@@ -2217,7 +1950,6 @@
                     "/Tests/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2233,15 +1965,15 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2017-12-14T19:40:10+00:00"
+            "time": "2018-01-03T07:37:34+00:00"
         },
         {
             "name": "symfony/finder",
-            "version": "v3.4.2",
+            "version": "v3.4.4",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/dac8d7db537bac7ad8143eb11360a8c2231f251a",
-                "reference": "dac8d7db537bac7ad8143eb11360a8c2231f251a",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/613e26310776f49a1773b6737c6bd554b8bc8c6f",
+                "reference": "613e26310776f49a1773b6737c6bd554b8bc8c6f",
                 "shasum": ""
             },
             "require": {
@@ -2261,7 +1993,6 @@
                     "/Tests/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2277,15 +2008,15 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2017-11-05T16:10:10+00:00"
+            "time": "2018-01-03T07:37:34+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.6.0",
+            "version": "v1.7.0",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296",
-                "reference": "2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/78be803ce01e55d3491c1397cf1c64beb9c1b63b",
+                "reference": "78be803ce01e55d3491c1397cf1c64beb9c1b63b",
                 "shasum": ""
             },
             "require": {
@@ -2297,7 +2028,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.6-dev"
+                    "dev-master": "1.7-dev"
                 }
             },
             "autoload": {
@@ -2331,15 +2062,15 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-10-11T12:05:26+00:00"
+            "time": "2018-01-30T19:27:44+00:00"
         },
         {
             "name": "symfony/process",
-            "version": "v3.4.2",
+            "version": "v3.4.4",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/bb3ef65d493a6d57297cad6c560ee04e2a8f5098",
-                "reference": "bb3ef65d493a6d57297cad6c560ee04e2a8f5098",
+                "url": "https://api.github.com/repos/symfony/process/zipball/09a5172057be8fc677840e591b17f385e58c7c0d",
+                "reference": "09a5172057be8fc677840e591b17f385e58c7c0d",
                 "shasum": ""
             },
             "require": {
@@ -2359,7 +2090,6 @@
                     "/Tests/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2375,7 +2105,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2017-12-14T19:40:10+00:00"
+            "time": "2018-01-29T09:03:43+00:00"
         },
         {
             "name": "twig/twig",
@@ -3027,8 +2757,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "craftcms/cms": 5,
-        "roave/security-advisories": 20,
-        "craftcms/ckeditor": 10
+        "roave/security-advisories": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
