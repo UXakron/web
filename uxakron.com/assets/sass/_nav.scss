@@ -85,6 +85,10 @@
     @media screen and (min-width: 500px) {
       display: block;
     }
+    @media screen and (min-width: $medium) {
+      position:absolute;
+      right:50px;
+    }
     .nav__list-item__link {
       color: $darkblue;
     }
