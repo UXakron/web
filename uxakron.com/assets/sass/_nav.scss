@@ -79,6 +79,10 @@
     border-top-left-radius: 2px;
     position: relative;
     margin-right: 0;
+    display: none;
+    @media screen and (min-width: 500px) {
+      display: block;
+    }
     .nav__list-item__link {
       color: $darkblue;
     }
