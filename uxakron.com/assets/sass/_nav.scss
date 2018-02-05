@@ -9,8 +9,10 @@
   background-repeat: no-repeat;
   padding: .5em 1.25em 1.25em 80px;
   position: relative;
+  margin-left: -2em;
   @media screen and (min-width: $small) {
     padding: .75em 2em 1.75em 100px;
+    margin-left: auto;
   }
   @media screen and (min-width: $medium) {
     padding-right: 2em;
