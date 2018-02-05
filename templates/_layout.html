@@ -2,7 +2,9 @@
 <html lang="en-us">
     {% include '_includes/_metadata.html' %}
   <body>
-    {{ adminbar() }}
+
+    {{ adminbar({ sticky: false }) }}
+
     {% include '_includes/_header.html' %}
     <main>
       {% block content %}

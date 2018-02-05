@@ -7,10 +7,13 @@
   background-image: url('/assets/img/nav-container.png');
   background-size: cover;
   background-repeat: no-repeat;
-  padding: .75em 1.25em .75em 80px;
+  padding: .5em 1.25em 1.25em 80px;
   position: relative;
   @media screen and (min-width: $small) {
-    padding: 1em 2em 2em 100px;
+    padding: .75em 2em 1.75em 100px;
+  }
+  @media screen and (min-width: $medium) {
+    padding-right: 2em;
   }
   &:after {
     content:"";
@@ -26,11 +29,17 @@
   background-image: url('/assets/img/ux-mark-white.svg');
   background-size: 100% auto;
   background-repeat: no-repeat;
+  background-position:center center;
   display: inline-block;
-  height: 25px;
-  width: 25px;
+  height: 35px;
+  width: 35px;
   max-width: 25px;
   margin-right: 50px;
+  margin-left: 15px;
+  @media screen and (min-width: $medium) {
+    max-width: 40px;
+    margin-left: 0;
+  }
 }
 
 .nav__logo span {
@@ -42,17 +51,49 @@
 }
 
 .nav__list {
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
+  align-items:center;
   list-style: none;
   display: inline-flex;
-  justify-content: space-between;
-  width: 100%;
+  justify-content: flex-end;
+  //margin-left: auto;
   max-width: 400px;
-  margin: 0 auto;
   font-weight: bold;
-  font-size: .95em;
+  font-size: .8em;
   letter-spacing: .5px;
+  @media screen and (min-width: $medium) {
+    font-size: .9em;
+  }
+}
+
+.nav__list-item {
+  margin-right: 3em;
+  @media screen and (min-width: $small) {
+    margin-right: 6em;
+  }
+  &:last-child {
+    background-color: white;
+    padding: .25em 1em;
+    border-top-right-radius: 2px;
+    border-top-left-radius: 2px;
+    position: relative;
+    margin-right: 0;
+    .nav__list-item__link {
+      color: $darkblue;
+    }
+    &:after {
+      width: 100%;
+      content: "";
+      height: 3px;
+      left: 0;
+      bottom: -5px;
+      position: absolute;
+      border-style: solid;
+      border-width: 4px 4px 0 2px;
+      border-color: $darkblue transparent transparent transparent;
+    }
+  }
 }
 
 .nav__list-item__link {
