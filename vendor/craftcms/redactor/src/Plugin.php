@@ -8,14 +8,21 @@ use yii\base\Event;
 
 /**
  * CKEditor plugin.
- *
  * @method static Plugin getInstance()
  *
  * @author Pixel & Tonic, Inc. <support@pixelandtonic.com>
- * @since  1.0
+ * @since 1.0
  */
 class Plugin extends \craft\base\Plugin
 {
+    // Properties
+    // =========================================================================
+
+    /**
+     * @inheritdoc
+     */
+    public $schemaVersion = '2.0.0';
+
     // Public Methods
     // =========================================================================
 

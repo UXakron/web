@@ -10,12 +10,15 @@
 
 namespace wbrowar\adminbar\services;
 
+use wbrowar\adminbar\events\AdminBarRenderEvent;
 use wbrowar\adminbar\AdminBar;
-use Mexitek\PHPColors\Color;
 
 use Craft;
 use craft\base\Component;
+use craft\elements\Category;
+use craft\elements\Entry;
 use craft\web\View;
+use yii\base\Event;
 
 
 /**
@@ -33,7 +36,10 @@ use craft\web\View;
  */
 class Bar extends Component
 {
-    private $_barEmbedded = false;
+    const EVENT_ADMIN_BAR_BEFORE_RENDER = 'adminBarBeforeRender';
+
+    public $templateCss = '';
+    public $templateJs = '';
 
     // Public Methods
     // =========================================================================
@@ -44,7 +50,7 @@ class Bar extends Component
      *
      * From any other plugin file, call it like this:
      *
-     *     AdminBar::$plugin->bar->exampleService()
+     *     AdminBar::$plugin->bar->canEmbed()
      *
      * @return mixed
      */
@@ -57,7 +63,7 @@ class Bar extends Component
             !Craft::$app->getRequest()->getIsCpRequest() &&
             !Craft::$app->getRequest()->getIsLivePreview() &&
             !Craft::$app->getUser()->getIsGuest() &&
-            (Craft::$app->getUser()->getIsAdmin() || Craft::$app->getUser()->can('accessCp'))
+            (Craft::$app->getUser()->getIsAdmin() || Craft::$app->getUser()->checkPermission('accessCp'))
         );
     }
     public function clearAdminBarCache()
@@ -66,59 +72,118 @@ class Bar extends Component
 
         Craft::$app->getTemplateCaches()->deleteCachesByKey('adminbar' . $user->id);
     }
+    public function getAdminBarWidgetsFromPlugins():array
+    {
+        $widgets = [];
+        $plugins = Craft::$app->plugins->getAllPlugins();
+
+        foreach ($plugins as $plugin) {
+            if ($plugin->adminBarWidgets ?? false) {
+                foreach ($plugin->adminBarWidgets as $widget) {
+                    $enabled = $widget['enabled'] ?? true;
+
+                    if (
+                        $enabled &&
+                        ($widget['handle'] ?? false) &&
+                        ($widget['template'] ?? false)
+                    ) {
+                        $widgets[] = [
+                            'id' => $plugin->handle . '_' . $widget['handle'],
+                            'description' => $widget['description'] ?? null,
+                            'handle' => $widget['handle'],
+                            'iconPath' => $plugin->basePath . '/' . $widget['iconPath'],
+                            'layout' => $widget['layout'] ?? 'columns_12',
+                            'name' => $widget['name'],
+                            'pluginHandle' => $plugin->handle,
+                            'pluginName' => $plugin->name,
+                            'template' => $widget['template'],
+                        ];
+                    }
+                }
+            }
+        }
+
+        return $widgets;
+    }
+    public function getActiveAdminBarWidgets():array
+    {
+        $widgets = [];
+
+        $settings = AdminBar::$plugin->getSettings();
+        $widgetsFromPlugins = $this->getAdminBarWidgetsFromPlugins();
+
+        foreach($widgetsFromPlugins as $pluginWidget) {
+            $id = $pluginWidget['pluginHandle'] . '_' . $pluginWidget['handle'];
+            $enabled = $pluginWidget['enabled'] ?? true;
+            if ($enabled && ($settings['widgets'][$id] ?? false) && $settings['widgets'][$id] === 1) {
+                $widgets[] = $pluginWidget;
+            }
+        }
+
+        return $widgets;
+    }
     public function render(array $config = [])
     {
         $settings = AdminBar::$plugin->getSettings();
-        $config['barEmbedded'] = $this->_barEmbedded;
         $config['customLinks'] = $settings['customLinks'] ?? [];
-        $config['bgColor'] = (!empty($config['bgColor'])
-                ? $this->_getColorRgbString($config['bgColor']) : null)
-            ?? (!empty($settings->bgColor)
-                ? $this->_getColorRgbString($settings->bgColor) : null)
-            ?? '0, 0, 0';
-        $config['highlightColor'] = (!empty($config['highlightColor'])
-                ? $this->_getColorRgbString($config['highlightColor']) : null)
-            ?? (!empty($settings->highlightColor)
-                ? $this->_getColorRgbString($settings->highlightColor) : null)
-            ?? '218, 90, 71';
-        $config['textColor'] = (!empty($config['textColor'])
-                ? $this->_getColorRgbString($config['textColor']) : null)
-            ?? (!empty($settings->textColor)
-                ? $this->_getColorRgbString($settings->textColor) : null)
-            ?? '255, 255, 255';
-
-//        if (Craft::$app->requireEdition(Craft::Pro) === true) {
-//            $config['localesEnabled'] = true;
-//        } else {
-//            $config['localesEnabled'] = false;
-//        }
+        $config['customCss'] = $settings['customCss'] ?? '';
+        $config['includeAssets'] = $config['includeAssets'] ?? true;
 
         // add config file settings to config
         $config['additionalLinks'] = $settings->additionalLinks;
-        $config['cacheBar'] = $settings->cacheBar;
         $config['displayDashboardLink'] = $settings->displayDashboardLink;
         $config['displayDefaultEditSection'] = $settings->displayDefaultEditSection;
         $config['displayGreeting'] = $settings->displayGreeting;
         $config['displayLogout'] = $settings->displayLogout;
         $config['displaySettingsLink'] = $settings->displaySettingsLink;
         $config['enableMobileMenu'] = $settings->enableMobileMenu;
-        $config['scrollLinks'] = $settings->scrollLinks;
+
+        // give plugins a chance to disable or modify their widgets
+        $this->trigger(self::EVENT_ADMIN_BAR_BEFORE_RENDER, new AdminBarRenderEvent([
+            'category' => $config['category'] ?? null,
+            'entry' => $config['entry'] ?? null,
+        ]));
+
+        // get Admin Bar widgets
+        $config['widgets'] = $this->getActiveAdminBarWidgets();
 
         $oldMode = Craft::$app->view->getTemplateMode();
         Craft::$app->view->setTemplateMode(View::TEMPLATE_MODE_CP);
         $html = Craft::$app->view->renderTemplate('admin-bar/bar', $config);
         Craft::$app->view->setTemplateMode($oldMode);
 
-        print($html);
-
-        // change embedded value to true
-        $this->_barEmbedded = true;
+        return $html;
     }
-    private function _getColorRgbString(string $cssColor):string
+    public function renderAdminBarForUri(string $uri, array $config = []):string
     {
-        // convert color to RGB and return string that can be transparentized
-        $color = new Color($cssColor);
-        $colorRgb = $color->getRgb();
-        return $colorRgb['R'] . ',' . $colorRgb['G'] . ',' . $colorRgb['B'];
+        if (Craft::$app->getUser()->getIsAdmin() || Craft::$app->getUser()->checkPermission('accessCp')) {
+            if (substr($uri, 0, 1) === '/') {
+                $uri = substr($uri, 1);
+            }
+            if ($uri === '') {
+                $uri = '__home__';
+            }
+            $entry = Entry::find()
+                ->uri($uri)
+                ->one();
+
+            if ($entry) {
+                $config['entry'] = $entry;
+            } else {
+                $category = Category::find()
+                    ->uri($uri)
+                    ->one();
+
+                if ($category) {
+                    $config['category'] = $category;
+                }
+            }
+
+            $config['includeAssets'] = $config['includeAssets'] ?? false;
+
+            return AdminBar::$plugin->bar->render($config);
+        }
+
+        return '';
     }
 }

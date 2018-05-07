@@ -58,7 +58,7 @@
     {% endif %}
 {% endjs %}
 
-{% set hasSystemIcon = CraftEdition >= CraftClient and craft.rebrand.isIconUploaded %}
+{% set hasSystemIcon = CraftEdition == CraftPro and craft.rebrand.isIconUploaded %}
 
 {% set forceConfirmUnload = craft.app.session.hasFlash('error') %}
 {% set fullPageForm = (fullPageForm is defined and fullPageForm) %}
@@ -101,14 +101,11 @@
 
             <div class="menu" data-align="left">
                 <ul>
-                    <li><a href="{{ siteUrl }}" target="_blank">View site</a></li>
+                    <li><a href="{{ siteUrl }}" target="_blank">{{ 'View site'|t('app') }}</a></li>
                 </ul>
                 <hr>
                 <ul>
-                    <li><a href="{{ url('myaccount') }}">My Account</a></li>
-                    {% if CraftEdition == CraftClient and currentUser.admin %}
-                        <li><a href="{{ url('clientaccount') }}">{{ "Client’s Account"|t('app') }}</a></li>
-                    {% endif %}
+                    <li><a href="{{ url('myaccount') }}">{{ 'My Account'|t('app') }}</a></li>
                     <li><a href="{{ url('logout') }}">{{ "Sign out"|t('app') }}</a></li>
                 </ul>
             </div>
@@ -221,7 +218,7 @@
                 {%- endif %}
 
                 {# main-header #}
-                <header id="header" class="flex">
+                <header id="header">
                     {% block header %}
                         {% block pageTitle %}
                             {% if title is defined and title|length %}
@@ -282,7 +279,7 @@
 {% endblock %}
 
 
-{% if not craft.app.updates.getIsUpdateInfoCached() %}
+{% if currentUser.can('performUpdates') and not craft.app.updates.getIsUpdateInfoCached() %}
     {% js %}
         Craft.cp.checkForUpdates();
     {% endjs %}

@@ -1,8 +1,8 @@
 <?php
 /**
- * @link      https://craftcms.com/
+ * @link https://craftcms.com/
  * @copyright Copyright (c) Pixel & Tonic, Inc.
- * @license   https://craftcms.github.io/license/
+ * @license https://craftcms.github.io/license/
  */
 
 namespace craft\web;
@@ -10,16 +10,19 @@ namespace craft\web;
 use Craft;
 use craft\base\ApplicationTrait;
 use craft\base\Plugin;
+use craft\db\Query;
 use craft\debug\DeprecatedPanel;
 use craft\debug\UserPanel;
-use craft\helpers\App;
 use craft\helpers\ArrayHelper;
 use craft\helpers\FileHelper;
 use craft\helpers\UrlHelper;
 use craft\queue\QueueLogBehavior;
 use yii\base\Component;
+use yii\base\ErrorException;
+use yii\base\InvalidArgumentException;
 use yii\base\InvalidConfigException;
 use yii\base\InvalidRouteException;
+use yii\db\Exception as DbException;
 use yii\debug\Module as DebugModule;
 use yii\debug\panels\AssetPanel;
 use yii\debug\panels\DbPanel;
@@ -36,20 +39,20 @@ use yii\web\Response;
 /**
  * Craft Web Application class
  *
- * @property Request             $request          The request component
- * @property \craft\web\Response $response         The response component
- * @property Session             $session          The session component
- * @property UrlManager          $urlManager       The URL manager for this application
- * @property User                $user             The user component
+ * An instance of the Web Application class is globally accessible to web requests in Craft via [[\Craft::$app|<code>Craft::$app</code>]].
  *
- * @method Request                                getRequest()      Returns the request component.
- * @method \craft\web\Response                    getResponse()     Returns the response component.
- * @method Session                                getSession()      Returns the session component.
- * @method UrlManager                             getUrlManager()   Returns the URL manager for this application.
- * @method User                                   getUser()         Returns the user component.
- *
+ * @property Request $request The request component
+ * @property \craft\web\Response $response The response component
+ * @property Session $session The session component
+ * @property UrlManager $urlManager The URL manager for this application
+ * @property User $user The user component
+ * @method Request getRequest()      Returns the request component.
+ * @method \craft\web\Response getResponse()     Returns the response component.
+ * @method Session getSession()      Returns the session component.
+ * @method UrlManager getUrlManager()   Returns the URL manager for this application.
+ * @method User getUser()         Returns the user component.
  * @author Pixel & Tonic, Inc. <support@pixelandtonic.com>
- * @since  3.0
+ * @since 3.0
  */
 class Application extends \yii\web\Application
 {
@@ -87,23 +90,55 @@ class Application extends \yii\web\Application
 
     /**
      * Initializes the application.
-     *
-     * @return void
      */
     public function init()
     {
-        parent::init();
-
+        $this->state = self::STATE_INIT;
+        // Important that we call $this->_init() before parent::init(), so that it's run before bootstrap()
+        // in case bootstrap() ends up loading a module that loads Twig, configuring Twig with the wrong timezone
         $this->_init();
+        parent::init();
         $this->ensureResourcePathExists();
         $this->debugBootstrap();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function bootstrap()
+    {
+        // Ensure that the request component has been instantiated
+        if (!$this->has('request', true)) {
+            $this->getRequest();
+        }
+
+        // Skip yii\web\Application::bootstrap, because we've already set @web and
+        // @webroot from craft\web\Request::init(), and we like our values better.
+        \yii\base\Application::bootstrap();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setTimeZone($value)
+    {
+        parent::setTimeZone($value);
+
+        if ($value !== 'UTC' && $this->getI18n()->getIsIntlLoaded()) {
+            // Make sure that ICU supports this timezone
+            try {
+                new \IntlDateFormatter($this->language, \IntlDateFormatter::NONE, \IntlDateFormatter::NONE);
+            } catch (\IntlException $e) {
+                Craft::warning("Time zone \"{$value}\" does not appear to be supported by ICU: ".intl_get_error_message());
+                parent::setTimeZone('UTC');
+            }
+        }
     }
 
     /**
      * Handles the specified request.
      *
      * @param Request $request the request to be handled
-     *
      * @return Response the resulting response
      * @throws HttpException
      * @throws ServiceUnavailableHttpException
@@ -113,6 +148,9 @@ class Application extends \yii\web\Application
      */
     public function handleRequest($request): Response
     {
+        // Process resource requests before anything else
+        $this->_processResourceRequest($request);
+
         $headers = $this->getResponse()->getHeaders();
 
         if ($request->getIsCpRequest()) {
@@ -127,7 +165,8 @@ class Application extends \yii\web\Application
 
         // Send the X-Powered-By header?
         if ($this->getConfig()->getGeneral()->sendPoweredByHeader) {
-            $headers->set('X-Powered-By', $this->name);
+            $original = $headers->get('X-Powered-By');
+            $headers->set('X-Powered-By', $original.($original ? ',' : '').$this->name);
         } else {
             // In case PHP is already setting one
             header_remove('X-Powered-By');
@@ -151,10 +190,9 @@ class Application extends \yii\web\Application
 
             if ($request->getIsCpRequest()) {
                 $version = $this->getInfo()->version;
-                $url = App::craftDownloadUrl($version);
 
-                throw new HttpException(200, Craft::t('app', 'Craft CMS does not support backtracking to this version. Please upload Craft CMS {url} or later.', [
-                    'url' => "[{$version}]({$url})",
+                throw new HttpException(200, Craft::t('app', 'Craft CMS does not support backtracking to this version. Please update to Craft CMS {version} or later.', [
+                    'version' => $version,
                 ]));
             }
 
@@ -171,8 +209,15 @@ class Application extends \yii\web\Application
         if ($this->getUpdates()->getHasCraftVersionChanged()) {
             $this->getUpdates()->updateCraftVersionInfo();
 
-            // Clear the template caches in case they've been compiled since this release was cut.
-            FileHelper::clearDirectory($this->getPath()->getCompiledTemplatesPath());
+            // Delete all compiled templates
+            try {
+                FileHelper::clearDirectory($this->getPath()->getCompiledTemplatesPath(false));
+            } catch (InvalidArgumentException $e) {
+                // the directory doesn't exist
+            } catch (ErrorException $e) {
+                Craft::error('Could not delete compiled templates: '.$e->getMessage());
+                Craft::$app->getErrorHandler()->logException($e);
+            }
         }
 
         // If the system is offline, make sure they have permission to be here
@@ -219,33 +264,9 @@ class Application extends \yii\web\Application
     }
 
     /**
-     * Tries to find a match between the browser's preferred languages and the languages Craft has been translated into.
-     *
-     * @return string|false
-     */
-    public function getTranslatedBrowserLanguage()
-    {
-        $browserLanguages = $this->getRequest()->getAcceptableLanguages();
-
-        if (!empty($browserLanguages)) {
-            $appLanguages = $this->getI18n()->getAppLocaleIds();
-
-            foreach ($browserLanguages as $language) {
-                if (in_array($language, $appLanguages, true)) {
-                    return $language;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * @inheritdoc
-     *
      * @param string $route
-     * @param array  $params
-     *
+     * @param array $params
      * @return Response|null The result of the action, normalized into a Response object
      */
     public function runAction($route, $params = [])
@@ -395,10 +416,49 @@ class Application extends \yii\web\Application
     }
 
     /**
+     * Processes resource requests.
+     *
+     * @param Request $request
+     */
+    private function _processResourceRequest(Request $request)
+    {
+        // Does this look like a resource request?
+        $resourceBaseUri = parse_url(Craft::getAlias($this->getConfig()->getGeneral()->resourceBaseUrl), PHP_URL_PATH);
+        $pathInfo = $request->getPathInfo();
+        if (strpos('/'.$pathInfo, $resourceBaseUri.'/') !== 0) {
+            return;
+        }
+
+        $resourceUri = substr($pathInfo, strlen($resourceBaseUri));
+        $slash = strpos($resourceUri, '/');
+        $hash = substr($resourceUri, 0, $slash);
+
+        try {
+            $sourcePath = (new Query())
+                ->select(['path'])
+                ->from('{{%resourcepaths}}')
+                ->where(['hash' => $hash])
+                ->scalar();
+        } catch (DbException $e) {
+            // Craft is either not installed or not updated to 3.0.3+ yet
+        }
+
+        if (empty($sourcePath)) {
+            return;
+        }
+
+        // Publish the directory
+        $filePath = substr($resourceUri, strlen($hash)+1);
+        $publishedPath = $this->getAssetManager()->getPublishedPath(Craft::getAlias($sourcePath), true).DIRECTORY_SEPARATOR.$filePath;
+        $this->getResponse()
+            ->sendFile($publishedPath, null, ['inline' => true]);
+        $this->end();
+    }
+
+    /**
      * Processes install requests.
      *
      * @param Request $request
-     *
      * @return null|Response
      * @throws NotFoundHttpException
      * @throws ServiceUnavailableHttpException
@@ -447,7 +507,6 @@ class Application extends \yii\web\Application
      * Processes action requests.
      *
      * @param Request $request
-     *
      * @return Response|null
      * @throws NotFoundHttpException if the requested action route is invalid
      */
@@ -471,7 +530,6 @@ class Application extends \yii\web\Application
 
     /**
      * @param Request $request
-     *
      * @return bool
      */
     private function _isSpecialCaseActionRequest(Request $request): bool
@@ -498,7 +556,6 @@ class Application extends \yii\web\Application
      * meet Craft’s minimum requirements.
      *
      * @param Request $request
-     *
      * @return Response|null
      */
     private function _processRequirementsCheck(Request $request)
@@ -526,7 +583,6 @@ class Application extends \yii\web\Application
 
     /**
      * @param Request $request
-     *
      * @return Response|null
      * @throws HttpException
      * @throws ServiceUnavailableHttpException
@@ -543,30 +599,33 @@ class Application extends \yii\web\Application
         ) {
             // Did we skip a breakpoint?
             if ($this->getUpdates()->getWasCraftBreakpointSkipped()) {
-                $minVersionUrl = App::craftDownloadUrl($this->minVersionRequired);
-                throw new HttpException(200, Craft::t('app', 'You need to be on at least Craft CMS {url} before you can manually update to Craft CMS {targetVersion}.', [
-                    'url' => "[{$this->minVersionRequired}]($minVersionUrl)",
+                throw new HttpException(200, Craft::t('app', 'You need to be on at least Craft CMS {version} before you can manually update to Craft CMS {targetVersion}.', [
+                    'version' => $this->minVersionRequired,
                     'targetVersion' => Craft::$app->getVersion(),
                 ]));
             }
 
             // Clear the template caches in case they've been compiled since this release was cut.
-            FileHelper::clearDirectory($this->getPath()->getCompiledTemplatesPath());
+            try {
+                FileHelper::clearDirectory($this->getPath()->getCompiledTemplatesPath(false));
+            } catch (InvalidArgumentException $e) {
+                // the directory doesn't exist
+            }
 
             // Show the manual update notification template
             return $this->runAction('templates/manual-update-notification');
         }
 
         // We'll also let update actions go through
-        if (
-            $request->getIsActionRequest() &&
-            (
-                ArrayHelper::firstValue($request->getActionSegments()) === 'updater' ||
-                $request->getActionSegments() === ['app', 'migrate']
-            )
-        ) {
-            $action = implode('/', $request->getActionSegments());
-            return $this->runAction($action);
+        if ($request->getIsActionRequest()) {
+            $actionSegments = $request->getActionSegments();
+            if (
+                ArrayHelper::firstValue($actionSegments) === 'updater' ||
+                $actionSegments === ['app', 'migrate'] ||
+                $actionSegments === ['pluginstore', 'install', 'migrate']
+            ) {
+                return $this->runAction(implode('/', $actionSegments));
+            }
         }
 
         // If an exception gets throw during the rendering of the 503 template, let
@@ -578,8 +637,6 @@ class Application extends \yii\web\Application
      * Checks if the system is off, and if it is, enforces the "Access the site/CP when the system is off" permissions.
      *
      * @param Request $request
-     *
-     * @return void
      * @throws ServiceUnavailableHttpException
      */
     private function _enforceSystemStatusPermissions(Request $request)

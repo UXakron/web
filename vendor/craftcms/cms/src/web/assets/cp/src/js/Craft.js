@@ -183,7 +183,7 @@ $.extend(Craft,
             if(typeof format == 'undefined') {
                 format = ',.0f';
             }
-            
+
             var formatter = d3.formatLocale(d3FormatLocaleDefinition).format(format);
 
             return formatter(number);
@@ -278,7 +278,7 @@ $.extend(Craft,
             }
 
             // Return path if it appears to be an absolute URL.
-            if (path.search('://') !== -1 || path.substr(0, 2) === '//') {
+            if (path.search('://') !== -1 || path[0] === '/') {
                 return path;
             }
 
@@ -970,7 +970,7 @@ $.extend(Craft,
 
             $elem.on('mousedown' + namespace, function() {
                     $elem.addClass('no-outline');
-                    $elem.focus();
+                    $elem.trigger('focus');
                 })
                 .on('keydown' + namespace + ' blur' + namespace, function(event) {
                     if (event.keyCode !== Garnish.SHIFT_KEY && event.keyCode !== Garnish.CTRL_KEY && event.keyCode !== Garnish.CMD_KEY) {
@@ -1476,7 +1476,7 @@ $.extend($.fn,
                         .appendTo($form);
                 }
 
-                $form.submit();
+                $form.trigger('submit');
             });
         },
 

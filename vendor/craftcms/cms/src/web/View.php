@@ -1,8 +1,8 @@
 <?php
 /**
- * @link      https://craftcms.com/
+ * @link https://craftcms.com/
  * @copyright Copyright (c) Pixel & Tonic, Inc.
- * @license   https://craftcms.github.io/license/
+ * @license https://craftcms.github.io/license/
  */
 
 namespace craft\web;
@@ -29,11 +29,9 @@ use yii\web\AssetBundle as YiiAssetBundle;
 
 /**
  * @inheritdoc
- *
  * @property Environment $twig the Twig environment
- *
  * @author Pixel & Tonic, Inc. <support@pixelandtonic.com>
- * @since  3.0
+ * @since 3.0
  */
 class View extends \yii\web\View
 {
@@ -283,9 +281,8 @@ class View extends \yii\web\View
     /**
      * Renders a Twig template.
      *
-     * @param string $template  The name of the template to load
-     * @param array  $variables The variables that should be available to the template
-     *
+     * @param string $template The name of the template to load
+     * @param array $variables The variables that should be available to the template
      * @return string the rendering result
      * @throws \Twig_Error_Loader if the template doesn’t exist
      * @throws Exception in case of failure
@@ -335,9 +332,8 @@ class View extends \yii\web\View
     /**
      * Renders a Twig template that represents an entire web page.
      *
-     * @param string $template  The name of the template to load
-     * @param array  $variables The variables that should be available to the template
-     *
+     * @param string $template The name of the template to load
+     * @param array $variables The variables that should be available to the template
      * @return string the rendering result
      */
     public function renderPageTemplate(string $template, array $variables = []): string
@@ -369,9 +365,8 @@ class View extends \yii\web\View
      * Renders a macro within a given Twig template.
      *
      * @param string $template The name of the template the macro lives in.
-     * @param string $macro    The name of the macro.
-     * @param array  $args     Any arguments that should be passed to the macro.
-     *
+     * @param string $macro The name of the macro.
+     * @param array $args Any arguments that should be passed to the macro.
      * @return string The rendered macro output.
      * @throws Exception in case of failure
      * @throws \RuntimeException in case of failure
@@ -402,39 +397,38 @@ class View extends \yii\web\View
     /**
      * Renders a template defined in a string.
      *
-     * @param string $template  The source template string.
-     * @param array  $variables Any variables that should be available to the template.
-     *
+     * @param string $template The source template string.
+     * @param array $variables Any variables that should be available to the template.
      * @return string The rendered template.
      */
     public function renderString(string $template, array $variables = []): string
     {
+        $twig = $this->getTwig();
+        $twig->setDefaultEscaperStrategy(false);
         $lastRenderingTemplate = $this->_renderingTemplate;
         $this->_renderingTemplate = 'string:'.$template;
-        $templateObj = $this->getTwig()->createTemplate($template);
-        $result = $templateObj->render($variables);
+        $result = $twig->createTemplate($template)->render($variables);
         $this->_renderingTemplate = $lastRenderingTemplate;
-
+        $twig->setDefaultEscaperStrategy();
         return $result;
     }
 
     /**
      * Renders a micro template for accessing properties of a single object.
-     *
      * The template will be parsed for {variables} that are delimited by single braces, which will get replaced with
      * full Twig output tags, i.e. {{ object.variable }}. Regular Twig tags are also supported.
      *
-     * @param string $template The source template string.
-     * @param mixed  $object   The object that should be passed into the template.
-     *
+     * @param string $template the source template string
+     * @param mixed $object the object that should be passed into the template
+     * @param array $variables any additional variables that should be available to the template
      * @return string The rendered template.
      * @throws Exception in case of failure
      * @throws \RuntimeException in case of failure
      */
-    public function renderObjectTemplate(string $template, $object): string
+    public function renderObjectTemplate(string $template, $object, array $variables = []): string
     {
         // If there are no dynamic tags, just return the template
-        if (!StringHelper::contains($template, '{')) {
+        if (strpos($template, '{') === false) {
             return $template;
         }
 
@@ -459,20 +453,30 @@ class View extends \yii\web\View
 
             // Get the variables to pass to the template
             if ($object instanceof Arrayable) {
-                $variables = $object->toArray([], [], false);
-            } else {
-                $variables = [];
+                // See if we should be including any of the extra fields
+                $extra = [];
+                foreach ($object->extraFields() as $field => $definition) {
+                    if (is_int($field)) {
+                        $field = $definition;
+                    }
+                    if (strpos($template, $field) !== false) {
+                        $extra[] = $field;
+                    }
+                }
+                $variables = array_merge($object->toArray([], $extra, false), $variables);
             }
+
             $variables['object'] = $object;
 
             // Render it!
+            $twig->setDefaultEscaperStrategy(false);
             $lastRenderingTemplate = $this->_renderingTemplate;
             $this->_renderingTemplate = 'string:'.$template;
             /** @var Template $templateObj */
             $templateObj = $this->_objectTemplates[$cacheKey];
             $output = $templateObj->render($variables);
-
             $this->_renderingTemplate = $lastRenderingTemplate;
+            $twig->setDefaultEscaperStrategy();
 
             // Re-enable strict variables
             if ($strictVariables) {
@@ -491,12 +495,10 @@ class View extends \yii\web\View
 
     /**
      * Returns whether a template exists.
-     *
      * Internally, this will just call [[resolveTemplate()]] with the given template name, and return whether that
      * method found anything.
      *
      * @param string $name The name of the template.
-     *
      * @return bool Whether the template exists.
      */
     public function doesTemplateExist(string $name): bool
@@ -511,7 +513,6 @@ class View extends \yii\web\View
 
     /**
      * Finds a template on the file system and returns its path.
-     *
      * All of the following files will be searched for, in this order:
      *
      * - TemplateName
@@ -554,7 +555,6 @@ class View extends \yii\web\View
      * request it is:
      *
      * - Front-end site requests:
-     *
      *     - templates/SiteHandle/foo/bar
      *     - templates/SiteHandle/foo/bar.html
      *     - templates/SiteHandle/foo/bar.twig
@@ -565,9 +565,7 @@ class View extends \yii\web\View
      *     - templates/foo/bar.twig
      *     - templates/foo/bar/index.html
      *     - templates/foo/bar/index.twig
-     *
      * - Control Panel requests:
-     *
      *     - vendor/craftcms/cms/src/templates/foo/bar
      *     - vendor/craftcms/cms/src/templates/foo/bar.html
      *     - vendor/craftcms/cms/src/templates/foo/bar.twig
@@ -580,7 +578,6 @@ class View extends \yii\web\View
      *     - path/to/fooplugin/templates/bar/index.twig
      *
      * @param string $name The name of the template.
-     *
      * @return string|false The path to the template if it exists, or `false`.
      */
     public function resolveTemplate(string $name)
@@ -603,7 +600,8 @@ class View extends \yii\web\View
 
         // Should we be looking for a localized version of the template?
         if ($this->_templateMode === self::TEMPLATE_MODE_SITE && Craft::$app->getIsInstalled()) {
-            $sitePath = $this->_templatesPath.DIRECTORY_SEPARATOR.Craft::$app->getSites()->currentSite->handle;
+            /** @noinspection PhpUnhandledExceptionInspection */
+            $sitePath = $this->_templatesPath.DIRECTORY_SEPARATOR.Craft::$app->getSites()->getCurrentSite()->handle;
             if (is_dir($sitePath)) {
                 $basePaths[] = $sitePath;
             }
@@ -667,12 +665,11 @@ class View extends \yii\web\View
     /**
      * Registers a hi-res CSS code block.
      *
-     * @param string      $css     the CSS code block to be registered
-     * @param array       $options the HTML attributes for the style tag.
-     * @param string|null $key     the key that identifies the CSS code block. If null, it will use
-     *                             $css as the key. If two CSS code blocks are registered with the same key, the latter
-     *                             will overwrite the former.
-     *
+     * @param string $css the CSS code block to be registered
+     * @param array $options the HTML attributes for the style tag.
+     * @param string|null $key the key that identifies the CSS code block. If null, it will use
+     * $css as the key. If two CSS code blocks are registered with the same key, the latter
+     * will overwrite the former.
      * @deprecated in 3.0. Use [[registerCss()]] and type your own media selector.
      */
     public function registerHiResCss(string $css, array $options = [], string $key = null)
@@ -702,13 +699,10 @@ class View extends \yii\web\View
 
     /**
      * Starts a JavaScript buffer.
-     *
      * JavaScript buffers work similarly to [output buffers](http://php.net/manual/en/intro.outcontrol.php) in PHP.
      * Once you’ve started a JavaScript buffer, any JavaScript code included with [[registerJs()]] will be included
      * in a buffer, and you will have the opportunity to fetch all of that code via [[clearJsBuffer()]] without
      * having it actually get output to the page.
-     *
-     * @return void
      */
     public function startJsBuffer()
     {
@@ -721,7 +715,6 @@ class View extends \yii\web\View
      * Clears and ends a JavaScript buffer, returning whatever JavaScript code was included while the buffer was active.
      *
      * @param bool $scriptTag Whether the JavaScript code should be wrapped in a `<script>` tag. Defaults to `true`.
-     *
      * @return string|false The JS code that was included in the active JS buffer, or `false` if there isn’t one
      */
     public function clearJsBuffer(bool $scriptTag = true)
@@ -752,18 +745,16 @@ class View extends \yii\web\View
     /**
      * Registers a generic `<script>` code block.
      *
-     * @param string $script   the generic `<script>` code block to be registered
-     * @param int    $position the position at which the generic `<script>` code block should be inserted
-     *                         in a page. The possible values are:
-     *
+     * @param string $script the generic `<script>` code block to be registered
+     * @param int $position the position at which the generic `<script>` code block should be inserted
+     * in a page. The possible values are:
      * - [[POS_HEAD]]: in the head section
      * - [[POS_BEGIN]]: at the beginning of the body section
      * - [[POS_END]]: at the end of the body section
-     *
-     * @param array  $options  the HTML attributes for the `<script>` tag.
-     * @param string $key      the key that identifies the generic `<script>` code block. If null, it will use
-     *                         $script as the key. If two generic `<script>` code blocks are registered with the same key, the latter
-     *                         will overwrite the former.
+     * @param array $options the HTML attributes for the `<script>` tag.
+     * @param string $key the key that identifies the generic `<script>` code block. If null, it will use
+     * $script as the key. If two generic `<script>` code blocks are registered with the same key, the latter
+     * will overwrite the former.
      */
     public function registerScript($script, $position = self::POS_END, $options = [], $key = null)
     {
@@ -830,9 +821,7 @@ class View extends \yii\web\View
 
     /**
      * Returns the content to be inserted in the head section.
-     *
      * This includes:
-     *
      * - Meta tags registered using [[registerMetaTag()]]
      * - Link tags registered with [[registerLinkTag()]]
      * - CSS code registered with [[registerCss()]]
@@ -841,7 +830,6 @@ class View extends \yii\web\View
      * - JS files registered with [[registerJsFile()]] with the position set to [[POS_HEAD]]
      *
      * @param bool $clear Whether the content should be cleared from the queue (default is true)
-     *
      * @return string the rendered content
      */
     public function getHeadHtml(bool $clear = true): string
@@ -864,14 +852,11 @@ class View extends \yii\web\View
 
     /**
      * Returns the content to be inserted at the end of the body section.
-     *
      * This includes:
-     *
      * - JS code registered with [[registerJs()]] with the position set to [[POS_BEGIN]], [[POS_END]], [[POS_READY]], or [[POS_LOAD]]
      * - JS files registered with [[registerJsFile()]] with the position set to [[POS_BEGIN]] or [[POS_END]]
      *
      * @param bool $clear Whether the content should be cleared from the queue (default is true)
-     *
      * @return string the rendered content
      */
     public function getBodyHtml(bool $clear = true): string
@@ -901,7 +886,6 @@ class View extends \yii\web\View
     /**
      * Registers any asset bundles and JS code that were queued-up in the session flash data.
      *
-     * @return void
      * @throws Exception if any of the registered asset bundles are not actually asset bundles
      */
     protected function registerAssetFlashes()
@@ -926,8 +910,6 @@ class View extends \yii\web\View
     /**
      * Registers all files provided by all registered asset bundles, including depending bundles files.
      * Removes a bundle from [[assetBundles]] once files are registered.
-     *
-     * @return void
      */
     protected function registerAllAssetFiles()
     {
@@ -939,15 +921,12 @@ class View extends \yii\web\View
     /**
      * Translates messages for a given translation category, so they will be
      * available for `Craft.t()` calls in the Control Panel.
-     *
      * Note this should always be called *before* any JavaScript is registered
      * that will need to use the translations, unless the JavaScript is
      * registered at [[self::POS_READY]].
      *
-     * @param string   $category The category the messages are in
+     * @param string $category The category the messages are in
      * @param string[] $messages The messages to be translated
-     *
-     * @return void
      */
     public function registerTranslations(string $category, array $messages)
     {
@@ -979,7 +958,6 @@ JS;
 
     /**
      * Returns the active namespace.
-     *
      * This is the default namespaces that will be used when [[namespaceInputs()]], [[namespaceInputName()]],
      * and [[namespaceInputId()]] are called, if their $namespace arguments are null.
      *
@@ -992,13 +970,10 @@ JS;
 
     /**
      * Sets the active namespace.
-     *
      * This is the default namespaces that will be used when [[namespaceInputs()]], [[namespaceInputName()]],
      * and [[namespaceInputId()]] are called, if their|null $namespace arguments are null.
      *
      * @param string|null $namespace The new namespace. Set to null to remove the namespace.
-     *
-     * @return void
      */
     public function setNamespace(string $namespace = null)
     {
@@ -1017,16 +992,12 @@ JS;
 
     /**
      * Sets the current template mode.
-     *
      * The template mode defines:
-     *
      * - the base path that templates should be looked for in
      * - the default template file extensions that should be automatically added when looking for templates
      * - the "index" template filenames that sholud be checked when looking for templates
      *
      * @param string $templateMode Either 'site' or 'cp'
-     *
-     * @return void
      * @throws Exception if $templateMode is invalid
      */
     public function setTemplateMode(string $templateMode)
@@ -1070,8 +1041,6 @@ JS;
      * Sets the base path that templates should be found in.
      *
      * @param string $templatesPath
-     *
-     * @return void
      */
     public function setTemplatesPath(string $templatesPath)
     {
@@ -1080,13 +1049,10 @@ JS;
 
     /**
      * Renames HTML input names so they belong to a namespace.
-     *
      * This method will go through the passed-in $html looking for `name=` attributes, and renaming their values such
      * that they will live within the passed-in $namespace (or the [[getNamespace()|active namespace]]).
-     *
      * By default, any `id=`, `for=`, `list=`, `data-target=`, `data-reverse-target=`, and `data-target-prefix=`
      * attributes will get namespaced as well, by prepending the namespace and a dash to their values.
-     *
      * For example, the following HTML:
      *
      * ```html
@@ -1115,10 +1081,9 @@ JS;
      * <input type="text" name="foo[bar][title]" id="foo-bar-title">
      * ```
      *
-     * @param string      $html            The template with the inputs.
-     * @param string|null $namespace       The namespace. Defaults to the [[getNamespace()|active namespace]].
-     * @param bool        $otherAttributes Whether id=, for=, etc., should also be namespaced. Defaults to `true`.
-     *
+     * @param string $html The template with the inputs.
+     * @param string|null $namespace The namespace. Defaults to the [[getNamespace()|active namespace]].
+     * @param bool $otherAttributes Whether id=, for=, etc., should also be namespaced. Defaults to `true`.
      * @return string The HTML with namespaced input names.
      */
     public function namespaceInputs(string $html, string $namespace = null, bool $otherAttributes = true): string
@@ -1143,7 +1108,7 @@ JS;
             // id= and for= attributes
             if ($otherAttributes) {
                 $idNamespace = $this->formatInputId($namespace);
-                $html = preg_replace('/(?<![\w\-])((id|for|list|aria\-labelledby|data\-target|data\-reverse\-target|data\-target\-prefix)=(\'|")#?)([^\.\'"][^\'"]*)\3/i', '$1'.$idNamespace.'-$4$3', $html);
+                $html = preg_replace('/(?<![\w\-])((id|for|list|aria\-labelledby|data\-target|data\-reverse\-target|data\-target\-prefix)=(\'|")#?)([^\.\'"][^\'"]*)?\3/i', '$1'.$idNamespace.'-$4$3', $html);
             }
 
             // Bring back the textarea content
@@ -1155,13 +1120,11 @@ JS;
 
     /**
      * Namespaces an input name.
-     *
      * This method applies the same namespacing treatment that [[namespaceInputs()]] does to `name=` attributes,
      * but only to a single value, which is passed directly into this method.
      *
-     * @param string      $inputName The input name that should be namespaced.
+     * @param string $inputName The input name that should be namespaced.
      * @param string|null $namespace The namespace. Defaults to the [[getNamespace()|active namespace]].
-     *
      * @return string The namespaced input name.
      */
     public function namespaceInputName(string $inputName, string $namespace = null): string
@@ -1179,13 +1142,11 @@ JS;
 
     /**
      * Namespaces an input ID.
-     *
      * This method applies the same namespacing treatment that [[namespaceInputs()]] does to `id=` attributes,
      * but only to a single value, which is passed directly into this method.
      *
-     * @param string      $inputId   The input ID that should be namespaced.
+     * @param string $inputId The input ID that should be namespaced.
      * @param string|null $namespace The namespace. Defaults to the [[getNamespace()|active namespace]].
-     *
      * @return string The namespaced input ID.
      */
     public function namespaceInputId(string $inputId, string $namespace = null): string
@@ -1203,19 +1164,13 @@ JS;
 
     /**
      * Formats an ID out of an input name.
-     *
      * This method takes a given input name and returns a valid ID based on it.
-     *
      * For example, if given the following input name:
-     *
      *     foo[bar][title]
-     *
      * the following ID would be returned:
-     *
      *     foo-bar-title
      *
      * @param string $inputName The input name.
-     *
      * @return string The input ID.
      */
     public function formatInputId(string $inputName): string
@@ -1225,7 +1180,6 @@ JS;
 
     /**
      * Queues up a method to be called by a given template hook.
-     *
      * For example, if you place this in your plugin’s [[BasePlugin::init()|init()]] method:
      *
      * ```php
@@ -1246,10 +1200,8 @@ JS;
      * template following the tag. Whatever your template hook function returns will be output in place of the tag in
      * the template as well.
      *
-     * @param string   $hook   The hook name.
+     * @param string $hook The hook name.
      * @param callback $method The callback function.
-     *
-     * @return void
      */
     public function hook(string $hook, $method)
     {
@@ -1258,12 +1210,10 @@ JS;
 
     /**
      * Invokes a template hook.
-     *
      * This is called by [[HookNode|<code>{% hook %}</code> tags]].
      *
-     * @param string $hook     The hook name.
-     * @param array  &$context The current template context.
-     *
+     * @param string $hook The hook name.
+     * @param array &$context The current template context.
      * @return string Whatever the hooks returned.
      */
     public function invokeHook(string $hook, array &$context): string
@@ -1285,9 +1235,8 @@ JS;
     /**
      * Performs actions before a template is rendered.
      *
-     * @param mixed $template   The name of the template to render
+     * @param mixed $template The name of the template to render
      * @param array &$variables The variables that should be available to the template
-     *
      * @return bool Whether the template should be rendered
      */
     public function beforeRenderTemplate(string $template, array &$variables): bool
@@ -1305,11 +1254,9 @@ JS;
     /**
      * Performs actions after a template is rendered.
      *
-     * @param mixed  $template  The name of the template that was rendered
-     * @param array  $variables The variables that were available to the template
-     * @param string $output    The template’s rendering result
-     *
-     * @return void
+     * @param mixed $template The name of the template that was rendered
+     * @param array $variables The variables that were available to the template
+     * @param string $output The template’s rendering result
      */
     public function afterRenderTemplate(string $template, array $variables, string &$output)
     {
@@ -1328,9 +1275,8 @@ JS;
     /**
      * Performs actions before a page template is rendered.
      *
-     * @param mixed $template   The name of the template to render
+     * @param mixed $template The name of the template to render
      * @param array &$variables The variables that should be available to the template
-     *
      * @return bool Whether the template should be rendered
      */
     public function beforeRenderPageTemplate(string $template, array &$variables): bool
@@ -1348,11 +1294,9 @@ JS;
     /**
      * Performs actions after a page template is rendered.
      *
-     * @param mixed  $template  The name of the template that was rendered
-     * @param array  $variables The variables that were available to the template
-     * @param string $output    The template’s rendering result
-     *
-     * @return void
+     * @param mixed $template The name of the template that was rendered
+     * @param array $variables The variables that were available to the template
+     * @param string $output The template’s rendering result
      */
     public function afterRenderPageTemplate(string $template, array $variables, string &$output)
     {
@@ -1376,7 +1320,6 @@ JS;
      * [[Twig_Loader_Filesystem]].
      *
      * @param string $name
-     *
      * @throws \Twig_Error_Loader
      */
     private function _validateTemplateName(string $name)
@@ -1386,7 +1329,8 @@ JS;
         }
 
         if (Path::ensurePathIsContained($name) === false) {
-            throw new \Twig_Error_Loader(Craft::t('app', 'Looks like you are trying to load a template outside the template folder: {template}.', ['template' => $name]));
+            Craft::error('Someone tried to load a template outside the templates folder: '.$name);
+            throw new \Twig_Error_Loader(Craft::t('app', 'Looks like you are trying to load a template outside the template folder.'));
         }
     }
 
@@ -1394,8 +1338,7 @@ JS;
      * Searches for a template files, and returns the first match if there is one.
      *
      * @param string $basePath The base path to be looking in.
-     * @param string $name     The name of the template to be looking for.
-     *
+     * @param string $name The name of the template to be looking for.
      * @return string|null The matching file path, or `null`.
      */
     private function _resolveTemplate(string $basePath, string $name)
@@ -1466,7 +1409,6 @@ JS;
      * Returns any registered template roots.
      *
      * @param string $which 'cp' or 'site'
-     *
      * @return array
      */
     private function _getTemplateRoots(string $which): array
@@ -1500,7 +1442,6 @@ JS;
      * Replaces textarea contents with a marker.
      *
      * @param array $matches
-     *
      * @return string
      */
     private function _createTextareaMarker(array $matches): string
@@ -1515,7 +1456,6 @@ JS;
      * Returns the HTML for an element in the CP.
      *
      * @param array &$context
-     *
      * @return string|null
      */
     private function _getCpElementHtml(array &$context)
@@ -1558,12 +1498,9 @@ JS;
                 $srcsets[] = $srcset.' '.$size.'w';
             }
 
-            $imgHtml = '<div class="elementthumb">'.
-                '<img '.
-                'sizes="'.($elementSize === 'small' ? self::$_elementThumbSizes[0] : self::$_elementThumbSizes[2]).'px" '.
-                'srcset="'.implode(', ', $srcsets).'" '.
-                'alt="">'.
-                '</div> ';
+            $sizesHtml = ($elementSize === 'small' ? self::$_elementThumbSizes[0] : self::$_elementThumbSizes[2]).'px';
+            $srcsetHtml = implode(', ', $srcsets);
+            $imgHtml = "<div class='elementthumb' data-sizes='{$sizesHtml}' data-srcset='{$srcsetHtml}'></div>";
         } else {
             $imgHtml = '';
         }
@@ -1611,7 +1548,9 @@ JS;
         }
 
         if ($element::hasStatuses()) {
-            $html .= '<span class="status '.$context['element']->getStatus().'"></span>';
+            $status = $element->getStatus();
+            $statusClasses = $status.' '.($element::statuses()[$status]['color'] ?? '');
+            $html .= '<span class="status '.$statusClasses.'"></span>';
         }
 
         $html .= $imgHtml;

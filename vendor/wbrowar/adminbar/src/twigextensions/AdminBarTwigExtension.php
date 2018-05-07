@@ -50,8 +50,11 @@ class AdminBarTwigExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
+            new \Twig_SimpleFunction('addAdminBarCss', [$this, 'addAdminBarCss']),
+            new \Twig_SimpleFunction('addAdminBarJs', [$this, 'addAdminBarJs']),
             new \Twig_SimpleFunction('adminbar', [$this, 'adminBar']),
             new \Twig_SimpleFunction('editlink', [$this, 'editLink']),
+            new \Twig_SimpleFunction('getAdminBarAssets', [$this, 'getAdminBarAssets'], array('is_safe' => array('html'))),
         ];
     }
 
@@ -62,7 +65,17 @@ class AdminBarTwigExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function adminBar(array $config = [])
+    public function addAdminBarCss(string $css)
+    {
+        AdminBar::$plugin->bar->templateCss .= $css;
+    }
+
+    public function addAdminBarJs(string $js)
+    {
+        AdminBar::$plugin->bar->templateJs .= $js;
+    }
+
+    public function adminBar(array $config = []):string
     {
         if (AdminBar::$plugin->bar->canEmbed()) {
             if (!isset($config['entry']) && !isset($config['url'])) {
@@ -80,20 +93,43 @@ class AdminBarTwigExtension extends \Twig_Extension
             }
 
             // show admin bar in template
-            return AdminBar::$plugin->bar->render($config);
+            print AdminBar::$plugin->bar->render($config);
         }
 
         return false;
     }
 
-    public function editLink(array $config = [])
+    public function editLink(array $config = []):string
     {
-        // deprecate color argument and migrate it to highlightColor
-        if ($config['color'] ?? false) {
-            $config['highlightColor'] = $config['color'];
-        }
-
         // embed admin bar in twig template
         return AdminBar::$plugin->editLinks->render($config);
+    }
+
+    public function getAdminBarAssets(array $config = [], bool $render = true)
+    {
+        if ($render) {
+            $config['includeAssets'] = $config['includeAssets'] ?? false;
+
+            if ($config['uri'] ?? false) {
+                AdminBar::$plugin->bar->renderAdminBarForUri($config['uri'], $config);
+            } else if (!isset($config['entry']) && !isset($config['url'])) {
+                $element = Craft::$app->urlManager->getMatchedElement();
+
+                if (!empty($element)) {
+                    if ($element instanceof craft\elements\Entry) {
+                        $config['entry'] = $element;
+                    } elseif ($element instanceof craft\elements\Category) {
+                        $config['category'] = $element;
+                    }
+                }
+
+                AdminBar::$plugin->bar->render($config);
+            }
+        }
+
+        $css = AdminBar::$plugin->bar->templateCss;
+        $js = $render ? 'function adminBarInit() {' . AdminBar::$plugin->bar->templateJs . '}' : AdminBar::$plugin->bar->templateJs;
+
+        return '<style>' . $css . '</style><script>' . $js . '</script>';
     }
 }

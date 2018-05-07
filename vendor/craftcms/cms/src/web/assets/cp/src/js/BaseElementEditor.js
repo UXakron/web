@@ -143,7 +143,7 @@ Craft.BaseElementEditor = Garnish.Base.extend(
                 }
 
                 // Focus on the first text input
-                $hudContents.find('.text:first').focus();
+                $hudContents.find('.text:first').trigger('focus');
 
                 this.addListener(this.$cancelBtn, 'click', function() {
                     this.hud.hide();
@@ -239,11 +239,6 @@ Craft.BaseElementEditor = Garnish.Base.extend(
                             else {
                                 $title.text(response.newTitle);
                             }
-                        }
-
-                        // Update Live Preview
-                        if (typeof Craft.livePreview !== 'undefined') {
-                            Craft.livePreview.updateIframe(true);
                         }
 
                         this.closeHud();
